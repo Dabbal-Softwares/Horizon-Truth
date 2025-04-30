@@ -4,10 +4,10 @@ const Hero = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-10 md:mb-0">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
                 Empowering Minds, <span className="text-blue-600">Fighting Misinformation</span>
               </h1>
-              <p className="text-lg text-gray-700 mb-8 max-w-lg">
+              <p className="text-lg text-white mb-8 max-w-lg">
                 Horizon Truth provides interactive tools and resources to help individuals identify and combat misinformation. Through gamified learning and community-driven verification, we are building a more informed and transparent society.
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -21,7 +21,7 @@ const Hero = () => {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="relative">
-                <img src="/assets/img/hero-02.jpg" alt="Digital literacy" className="rounded-xl shadow-2xl w-full max-w-md border-8 border-white" />
+                <img src="https://truth.debbal.com/assets/img/hero-02.jpg" alt="Digital literacy" className="rounded-xl shadow-2xl w-full max-w-md border-8 border-white" />
                 <div className="absolute -bottom-6 -right-6 bg-blue-100 p-4 rounded-lg shadow-lg hidden md:block">
                   <div className="flex items-center">
                     <div className="bg-blue-600 p-3 rounded-full mr-3">

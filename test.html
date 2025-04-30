@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misinformation Investigator Game | Debbal Truth</title>
+    <title>Horizon Truth - Combating Misinformation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -11,12 +11,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3b82f6',
-                        secondary: '#2563eb',
-                        accent: '#1d4ed8',
-                        danger: '#ef4444',
-                        success: '#10b981',
-                        warning: '#f59e0b',
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        accent: '#3b82f6',
                         dark: '#1e293b',
                         light: '#f8fafc',
                     },
@@ -30,401 +27,349 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
-        body {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            min-height: 100vh;
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(248, 250, 252, 0.8) 100%), url('https://truth.debbal.com/assets/img/hero-02.jpg');
+            background-size: cover;
+            background-position: center;
         }
         
-        .game-card {
-            transition: all 0.3s ease;
-            transform-style: preserve-3d;
-        }
-        
-        .game-card:hover {
-            transform: translateY(-5px) scale(1.02);
+        .feature-card:hover {
+            transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
-        .social-post {
-            border-left: 4px solid #3b82f6;
+        .nav-link {
+            position: relative;
         }
         
-        .choice-card {
-            transition: all 0.2s ease;
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
         }
         
-        .choice-card:hover {
-            transform: scale(1.03);
-        }
-        
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .nav-link:hover:after {
+            width: 100%;
         }
     </style>
 </head>
-<body class="font-sans antialiased text-gray-800">
-    <!-- Game Container -->
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <!-- Game Header -->
-        <header class="text-center mb-12">
-            <div class="flex justify-center mb-6">
-                <div class="bg-blue-100 p-4 rounded-full">
-                    <i class="fas fa-search text-blue-600 text-4xl"></i>
+<body class="font-sans antialiased text-gray-800 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <img src="https://truth.debbal.com/assets/img/logo.png" alt="Horizon Truth" class="h-10">
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="https://truth.debbal.com" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Home</a>
+                    <a href="https://truth.debbal.com/about" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">About Us</a>
+                    <a href="https://truth.debbal.com/resources" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Resources</a>
+                    <a href="https://truth.debbal.com/report" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Report</a>
+                    <a href="https://truth.debbal.com/game" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Game</a>
+                    <a href="https://truth.debbal.com/news" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">News</a>
+                    <a href="https://truth.debbal.com/contact" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Contact</a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Misinformation Investigator Game</h1>
-            <p class="text-xl text-gray-700 max-w-2xl mx-auto">Become a digital detective and learn to spot fake news in this interactive challenge!</p>
-        </header>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="hidden md:hidden py-4">
+                <a href="https://truth.debbal.com" class="block py-2 text-gray-700 hover:text-blue-600">Home</a>
+                <a href="https://truth.debbal.com/about" class="block py-2 text-gray-700 hover:text-blue-600">About Us</a>
+                <a href="https://truth.debbal.com/resources" class="block py-2 text-gray-700 hover:text-blue-600">Resources</a>
+                <a href="https://truth.debbal.com/report" class="block py-2 text-gray-700 hover:text-blue-600">Report</a>
+                <a href="https://truth.debbal.com/game" class="block py-2 text-gray-700 hover:text-blue-600">Game</a>
+                <a href="https://truth.debbal.com/news" class="block py-2 text-gray-700 hover:text-blue-600">News</a>
+                <a href="https://truth.debbal.com/contact" class="block py-2 text-gray-700 hover:text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Game Content - Changes based on state -->
-        <div id="game-content" class="bg-white rounded-xl shadow-lg overflow-hidden mb-8 transition-all duration-300">
-            <!-- Initial Game Screen -->
-            <div id="welcome-screen" class="p-8">
-                <div class="flex items-center mb-6">
-                    <div class="bg-blue-100 p-3 rounded-full mr-4">
-                        <i class="fas fa-info-circle text-blue-600 text-xl"></i>
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                        Empowering Minds, <span class="text-blue-600">Fighting Misinformation</span>
+                    </h1>
+                    <p class="text-lg text-gray-700 mb-8 max-w-lg">
+                        Horizon Truth provides interactive tools and resources to help individuals identify and combat misinformation. Through gamified learning and community-driven verification, we are building a more informed and transparent society.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="https://truth.debbal.com/game" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 text-center shadow-lg">
+                            Start the Game
+                        </a>
+                        <a href="https://truth.debbal.com/about" class="bg-white hover:bg-gray-100 text-blue-600 font-semibold py-3 px-8 rounded-lg transition duration-300 text-center shadow-lg border border-blue-600">
+                            Learn More
+                        </a>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-900">Welcome to Debbal Truth's Investigation Game!</h2>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <img src="https://truth.debbal.com/assets/img/hero-02.jpg" alt="Digital literacy" class="rounded-xl shadow-2xl w-full max-w-md border-8 border-white">
+                        <div class="absolute -bottom-6 -right-6 bg-blue-100 p-4 rounded-lg shadow-lg hidden md:block">
+                            <div class="flex items-center">
+                                <div class="bg-blue-600 p-3 rounded-full mr-3">
+                                    <i class="fas fa-shield-alt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-blue-800">Verified Content</p>
+                                    <p class="text-sm text-gray-600">Community-driven verification</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <span class="text-blue-600 font-semibold tracking-wider">ABOUT HORIZON TRUTH</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Mission to Fight Misinformation</h2>
+                    <p class="text-gray-700 mb-6 max-w-lg">
+                        Horizon Truth is dedicated to empowering individuals, especially youth, to navigate the digital world responsibly. We believe that in today's fast-paced information age, digital literacy is key to making informed decisions, understanding the truth, and fostering a healthier, more connected society.
+                    </p>
+                    <a href="https://truth.debbal.com/about" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
+                        About More
+                    </a>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-gamepad text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Gamified Learning</h3>
+                            <p class="text-gray-700">Engaging games to teach digital literacy skills in a fun way.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-users text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Community Power</h3>
+                            <p class="text-gray-700">Crowdsourced verification to combat misinformation together.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-graduation-cap text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Educational Resources</h3>
+                            <p class="text-gray-700">Comprehensive materials to improve media literacy.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-trophy text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Reward System</h3>
+                            <p class="text-gray-700">Earn points and recognition for your contributions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-blue-600 font-semibold tracking-wider">EXPLORE OUR TOOLS</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Key Features of Horizon Truth</h2>
+                <p class="text-gray-700">Powerful tools designed to help you identify and combat misinformation effectively.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-gamepad text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Gamified Learning Platform</h3>
+                    <p class="text-gray-700 mb-4">Engage in fun, interactive games to boost digital literacy skills and learn to spot misinformation in an enjoyable way.</p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Read more <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
                 
-                <p class="text-gray-700 mb-6">In this game, your mission is to investigate and debunk misinformation. You'll encounter various real-world scenarios where you need to apply critical thinking and make informed decisions.</p>
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-bullhorn text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Crowdsourced Reporting</h3>
+                    <p class="text-gray-700 mb-4">Flag and verify content through our community-driven reporting system that leverages collective intelligence.</p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Read more <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
                 
-                <div class="bg-blue-50 p-6 rounded-lg mb-8">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                        <i class="fas fa-gamepad text-blue-600 mr-3"></i> How to Play:
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                            <span>Choose a scenario to begin your investigation</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                            <span>Analyze the information carefully before taking action</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                            <span>Make choices that help stop the spread of misinformation</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                            <span>Learn from feedback to improve your digital literacy</span>
-                        </li>
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Community Engagement</h3>
+                    <p class="text-gray-700 mb-4">Earn rewards and recognition for actively combating misinformation and contributing to a more truthful digital space.</p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Read more <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-20 bg-blue-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="font-semibold tracking-wider text-blue-200">HOW IT WORKS</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Start Fighting Misinformation Today</h2>
+                <p class="text-blue-100">Simple steps to become a misinformation warrior and earn rewards.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-blue-700 bg-opacity-30 p-8 rounded-xl">
+                    <div class="text-4xl font-bold text-blue-200 mb-4">01</div>
+                    <h3 class="text-xl font-bold mb-3">Engage in Scenarios</h3>
+                    <p class="text-blue-100">Navigate real-world misinformation challenges to understand how false content spreads in various contexts.</p>
+                </div>
+                
+                <div class="bg-blue-700 bg-opacity-30 p-8 rounded-xl">
+                    <div class="text-4xl font-bold text-blue-200 mb-4">02</div>
+                    <h3 class="text-xl font-bold mb-3">Evaluate Content</h3>
+                    <p class="text-blue-100">Analyze health myths, political manipulation, and social media hoaxes using critical thinking tools.</p>
+                </div>
+                
+                <div class="bg-blue-700 bg-opacity-30 p-8 rounded-xl">
+                    <div class="text-4xl font-bold text-blue-200 mb-4">03</div>
+                    <h3 class="text-xl font-bold mb-3">Earn Rewards</h3>
+                    <p class="text-blue-100">Correctly identifying misinformation earns you points, helping you level up and gain valuable rewards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Join the Fight Against Misinformation?</h2>
+            <p class="text-gray-300 max-w-2xl mx-auto mb-8">Sign up now and start your journey towards becoming a misinformation warrior today.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="https://truth.debbal.com/game" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
+                    Start Playing
+                </a>
+                <a href="https://truth.debbal.com/about" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <img src="https://truth.debbal.com/assets/img/logo.png" alt="Horizon Truth" class="h-10 mb-4">
+                    <p class="mb-4">Empowering minds to identify and combat misinformation through interactive tools and community engagement.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://truth.debbal.com" class="hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="https://truth.debbal.com/about" class="hover:text-white transition duration-300">About Us</a></li>
+                        <li><a href="https://truth.debbal.com/resources" class="hover:text-white transition duration-300">Resources</a></li>
+                        <li><a href="https://truth.debbal.com/game" class="hover:text-white transition duration-300">Game</a></li>
                     </ul>
                 </div>
                 
-                <h3 class="text-xl font-semibold text-gray-900 mb-6 text-center">Select a Scenario to Begin:</h3>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://truth.debbal.com/report" class="hover:text-white transition duration-300">Report Misinformation</a></li>
+                        <li><a href="https://truth.debbal.com/news" class="hover:text-white transition duration-300">News & Updates</a></li>
+                        <li><a href="https://truth.debbal.com/contact" class="hover:text-white transition duration-300">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">FAQs</a></li>
+                    </ul>
+                </div>
                 
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="game-card bg-white border border-gray-200 rounded-xl p-6 text-center cursor-pointer hover:border-blue-300"
-                         onclick="startScenario(1)">
-                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-users text-blue-600 text-2xl"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-gray-900 mb-2">Social Media Misinformation</h4>
-                        <p class="text-gray-600 mb-4">Learn to spot fake news spreading on platforms like Twitter and Facebook</p>
-                        <span class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">Start Investigation</span>
-                    </div>
-                    
-                    <div class="game-card bg-white border border-gray-200 rounded-xl p-6 text-center cursor-pointer hover:border-blue-300"
-                         onclick="startScenario(2)">
-                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-heartbeat text-blue-600 text-2xl"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-gray-900 mb-2">Fake Health News</h4>
-                        <p class="text-gray-600 mb-4">Identify dangerous health myths and medical misinformation</p>
-                        <span class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">Start Investigation</span>
-                    </div>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Newsletter</h3>
+                    <p class="mb-4">Subscribe to our newsletter for the latest updates on misinformation trends and prevention.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="bg-gray-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-lg transition duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
             
-            <!-- Scenario Screens will be injected here by JavaScript -->
-        </div>
-        
-        <!-- Game Progress -->
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Your Investigator Progress</h3>
-                <span class="text-sm font-medium text-blue-600">Level 1 Detective</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-4">
-                <div id="progress-bar" class="bg-blue-600 h-4 rounded-full" style="width: 0%"></div>
-            </div>
-            <div class="flex justify-between text-sm text-gray-600 mt-2">
-                <span>0/10 scenarios completed</span>
-                <span>0% accuracy</span>
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p>Copyright © 2025 <a href="https://debbal.com" class="text-blue-400 hover:text-blue-300">Debbal</a>. All Rights Reserved</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition duration-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition duration-300">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition duration-300">Cookies</a>
+                </div>
             </div>
         </div>
-        
-        <!-- Footer -->
-        <footer class="text-center text-gray-600 text-sm">
-            <p>© 2024 Debbal Truth - Empowering Digital Literacy. All Rights Reserved</p>
-            <div class="flex justify-center space-x-4 mt-2">
-                <a href="#" class="hover:text-blue-600">Privacy Policy</a>
-                <a href="#" class="hover:text-blue-600">Terms of Service</a>
-                <a href="#" class="hover:text-blue-600">Contact Us</a>
-            </div>
-        </footer>
-    </div>
-    
-    <!-- Scenario Templates (Hidden) -->
-    <div id="scenario-1-template" class="hidden">
-        <div class="p-8">
-            <div class="flex items-center mb-6">
-                <div class="bg-blue-100 p-3 rounded-full mr-4">
-                    <i class="fas fa-users text-blue-600 text-xl"></i>
-                </div>
-                <h2 class="text-2xl font-bold text-gray-900">Scenario 1: Social Media Misinformation</h2>
-            </div>
-            
-            <div class="social-post bg-white border border-gray-200 rounded-lg p-6 mb-8 shadow-sm">
-                <div class="flex items-center mb-4">
-                    <div class="bg-red-100 w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                        <i class="fas fa-exclamation-triangle text-red-500"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-900">🚨 Breaking News! Celebrity X Quits Acting Forever! 🚨</h3>
-                        <p class="text-sm text-gray-500">Posted by TrendingNowNews | 5 hours ago</p>
-                    </div>
-                </div>
-                
-                <p class="text-gray-800 mb-4">"Celebrity X, beloved star of blockbuster movies, has announced their decision to leave acting forever. According to a source close to the celebrity, they plan to focus on their personal life and spend more time with their family. Fans are devastated. Read more here: bit.ly/fake-news-link"</p>
-                
-                <div class="flex space-x-6 text-sm text-gray-500 border-t border-gray-100 pt-3">
-                    <span><i class="far fa-thumbs-up mr-1"></i> 12,345 Likes</span>
-                    <span><i class="fas fa-share mr-1"></i> 4,567 Shares</span>
-                    <span><i class="far fa-comment mr-1"></i> 2,345 Comments</span>
-                </div>
-            </div>
-            
-            <h3 class="text-xl font-semibold text-gray-900 mb-6">Analyze the post above and choose your next action:</h3>
-            
-            <div class="grid md:grid-cols-2 gap-4 mb-8">
-                <div class="choice-card bg-white border border-gray-200 rounded-lg p-6 cursor-pointer hover:border-green-300 hover:bg-green-50 transition-all"
-                     onclick="makeChoice(1, true)">
-                    <div class="flex items-start">
-                        <div class="bg-green-100 p-2 rounded-full mr-4">
-                            <i class="fas fa-search text-green-600"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-2">Investigate the Source</h4>
-                            <p class="text-gray-600 text-sm">Check the credibility of TrendingNowNews and the linked article</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="choice-card bg-white border border-gray-200 rounded-lg p-6 cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all"
-                     onclick="makeChoice(2, false)">
-                    <div class="flex items-start">
-                        <div class="bg-blue-100 p-2 rounded-full mr-4">
-                            <i class="fas fa-hashtag text-blue-600"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-2">Check Hashtag Trends</h4>
-                            <p class="text-gray-600 text-sm">See what reliable sources are saying about this topic</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="choice-card bg-white border border-gray-200 rounded-lg p-6 cursor-pointer hover:border-red-300 hover:bg-red-50 transition-all"
-                     onclick="makeChoice(3, false)">
-                    <div class="flex items-start">
-                        <div class="bg-red-100 p-2 rounded-full mr-4">
-                            <i class="fas fa-check text-red-600"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-2">Assume It's True</h4>
-                            <p class="text-gray-600 text-sm">Accept the post at face value and share with your network</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="choice-card bg-white border border-gray-200 rounded-lg p-6 cursor-pointer hover:border-purple-300 hover:bg-purple-50 transition-all"
-                     onclick="makeChoice(4, true)">
-                    <div class="flex items-start">
-                        <div class="bg-purple-100 p-2 rounded-full mr-4">
-                            <i class="fas fa-user-check text-purple-600"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-2">Verify With Official Sources</h4>
-                            <p class="text-gray-600 text-sm">Check Celebrity X's official social media accounts</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-sm text-gray-500">
-                <i class="fas fa-lightbulb mr-2 text-yellow-500"></i>
-                <span>Tip: Viral posts often use emotional language to encourage sharing without verification</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Failure Feedback Template -->
-    <div id="failure-feedback-template" class="hidden">
-        <div class="p-8 text-center">
-            <div class="bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-times text-red-500 text-3xl"></i>
-            </div>
-            
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">Oops! You Fell for Misinformation</h2>
-            
-            <div class="bg-red-50 border border-red-200 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
-                <h3 class="text-xl font-semibold text-gray-900 mb-3">Why This Was the Wrong Choice:</h3>
-                <p class="text-gray-700 mb-4">Assuming viral posts are true without verification is how misinformation spreads rapidly. This post contains several red flags:</p>
-                
-                <ul class="text-left space-y-3 mb-6">
-                    <li class="flex items-start">
-                        <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
-                        <span><strong>No official confirmation:</strong> The post cites an unnamed "source close to the celebrity"</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
-                        <span><strong>Suspicious link:</strong> The "bit.ly" shortened URL hides the actual destination</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
-                        <span><strong>Emotional manipulation:</strong> Phrases like "fans are devastated" encourage sharing</span>
-                    </li>
-                </ul>
-                
-                <div class="bg-white p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-bold text-gray-900 mb-2">The Truth:</h4>
-                    <p class="text-gray-700">Celebrity X's publicist has confirmed this story is completely false. The celebrity is currently filming their next movie.</p>
-                </div>
-            </div>
-            
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">How to Spot Similar Misinformation:</h3>
-            
-            <div class="grid md:grid-cols-2 gap-6 mb-8 max-w-4xl mx-auto">
-                <div class="bg-white p-6 rounded-lg border border-gray-200">
-                    <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-search text-blue-600"></i>
-                    </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Check the Source</h4>
-                    <p class="text-gray-600 text-sm">Verify if the account sharing the news is reputable. Look for blue verification badges.</p>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg border border-gray-200">
-                    <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-link text-blue-600"></i>
-                    </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Inspect Links</h4>
-                    <p class="text-gray-600 text-sm">Hover over links to see the real URL before clicking. Shortened URLs are often suspicious.</p>
-                </div>
-            </div>
-            
-            <button onclick="continueGame()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg mx-auto">
-                Continue Your Investigation
-            </button>
-        </div>
-    </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script>
-        // Game state
-        const gameState = {
-            currentScenario: 0,
-            score: 0,
-            completed: 0,
-            scenarios: [
-                // Scenario 1
-                {
-                    question: "Social media post about celebrity quitting acting",
-                    correctChoices: [1, 4],
-                    feedback: {
-                        incorrect: "Assuming viral posts are true without verification is how misinformation spreads rapidly.",
-                        correct: "Great job investigating the source! Always verify sensational claims with official channels."
-                    }
-                },
-                // More scenarios can be added here
-            ]
-        };
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
         
-        // Start a scenario
-        function startScenario(num) {
-            gameState.currentScenario = num;
-            const template = document.getElementById(`scenario-${num}-template`).innerHTML;
-            document.getElementById('game-content').innerHTML = template;
-            
-            // Update UI
-            document.getElementById('welcome-screen').classList.add('hidden');
-        }
-        
-        // Player makes a choice
-        function makeChoice(choiceId, isCorrect) {
-            if (isCorrect) {
-                // Handle correct choice
-                gameState.score += 10;
-                showFeedback(true);
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
             } else {
-                // Handle incorrect choice
-                showFeedback(false);
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
             }
-            
-            // Update progress
-            updateProgress();
-        }
+        });
         
-        // Show feedback based on choice
-        function showFeedback(isCorrect) {
-            if (isCorrect) {
-                // Show success feedback
-                alert("Correct! " + gameState.scenarios[gameState.currentScenario-1].feedback.correct);
-                continueGame();
-            } else {
-                // Show failure feedback
-                const template = document.getElementById('failure-feedback-template').innerHTML;
-                document.getElementById('game-content').innerHTML = template;
-            }
-        }
-        
-        // Continue to next question or scenario
-        function continueGame() {
-            gameState.completed += 1;
-            if (gameState.completed < 10) {
-                // For demo, just restart scenario 1
-                startScenario(1);
-            } else {
-                // Game completed
-                document.getElementById('game-content').innerHTML = `
-                    <div class="p-12 text-center">
-                        <div class="bg-green-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8">
-                            <i class="fas fa-trophy text-green-500 text-4xl"></i>
-                        </div>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Investigation Complete!</h2>
-                        <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">You've completed all scenarios with ${gameState.score}% accuracy!</p>
-                        <button onclick="resetGame()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
-                            Play Again
-                        </button>
-                    </div>
-                `;
-            }
-        }
-        
-        // Reset the game
-        function resetGame() {
-            gameState.score = 0;
-            gameState.completed = 0;
-            document.getElementById('welcome-screen').classList.remove('hidden');
-            document.getElementById('game-content').innerHTML = document.getElementById('welcome-screen').outerHTML;
-            updateProgress();
-        }
-        
-        // Update progress bar
-        function updateProgress() {
-            const progress = (gameState.completed / 10) * 100;
-            document.getElementById('progress-bar').style.width = `${progress}%`;
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            updateProgress();
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 </body>
