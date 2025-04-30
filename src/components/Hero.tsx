@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Hero = () => {
     return (
       <section className="hero-bg min-h-screen flex items-center py-16">
@@ -11,12 +13,12 @@ const Hero = () => {
                 Horizon Truth provides interactive tools and resources to help individuals identify and combat misinformation. Through gamified learning and community-driven verification, we are building a more informed and transparent society.
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="/game" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 text-center shadow-lg">
+                <Link to="/game" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 text-center shadow-lg">
                   Start the Game
-                </a>
-                <a href="/about" className="bg-white hover:bg-gray-100 text-blue-600 font-semibold py-3 px-8 rounded-lg transition duration-300 text-center shadow-lg border border-blue-600">
+                </Link>
+                <Link to="/about" className="bg-white hover:bg-gray-100 text-blue-600 font-semibold py-3 px-8 rounded-lg transition duration-300 text-center shadow-lg border border-blue-600">
                   Learn More
-                </a>
+                </Link>
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
