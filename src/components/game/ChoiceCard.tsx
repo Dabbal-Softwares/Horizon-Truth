@@ -8,7 +8,6 @@ interface ChoiceCardProps {
 }
 
 const ChoiceCard = ({
-  id,
   icon,
   color,
   title,
