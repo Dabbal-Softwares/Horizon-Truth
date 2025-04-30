@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Truth - Combating Misinformation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        accent: '#3b82f6',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(248, 250, 252, 0.8) 100%), url('https://truth.debbal.com/assets/img/hero-02.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <img src="https://truth.debbal.com/assets/img/logo.png" alt="Horizon Truth" class="h-10">
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="https://truth.debbal.com" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Home</a>
+                    <a href="https://truth.debbal.com/about" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">About Us</a>
+                    <a href="https://truth.debbal.com/resources" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Resources</a>
+                    <a href="https://truth.debbal.com/report" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Report</a>
+                    <a href="https://truth.debbal.com/game" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Game</a>
+                    <a href="https://truth.debbal.com/news" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">News</a>
+                    <a href="https://truth.debbal.com/contact" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Contact</a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="hidden md:hidden py-4">
+                <a href="https://truth.debbal.com" class="block py-2 text-gray-700 hover:text-blue-600">Home</a>
+                <a href="https://truth.debbal.com/about" class="block py-2 text-gray-700 hover:text-blue-600">About Us</a>
+                <a href="https://truth.debbal.com/resources" class="block py-2 text-gray-700 hover:text-blue-600">Resources</a>
+                <a href="https://truth.debbal.com/report" class="block py-2 text-gray-700 hover:text-blue-600">Report</a>
+                <a href="https://truth.debbal.com/game" class="block py-2 text-gray-700 hover:text-blue-600">Game</a>
+                <a href="https://truth.debbal.com/news" class="block py-2 text-gray-700 hover:text-blue-600">News</a>
+                <a href="https://truth.debbal.com/contact" class="block py-2 text-gray-700 hover:text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                        Empowering Minds, <span class="text-blue-600">Fighting Misinformation</span>
+                    </h1>
+                    <p class="text-lg text-gray-700 mb-8 max-w-lg">
+                        Horizon Truth provides interactive tools and resources to help individuals identify and combat misinformation. Through gamified learning and community-driven verification, we are building a more informed and transparent society.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="https://truth.debbal.com/game" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 text-center shadow-lg">
+                            Start the Game
+                        </a>
+                        <a href="https://truth.debbal.com/about" class="bg-white hover:bg-gray-100 text-blue-600 font-semibold py-3 px-8 rounded-lg transition duration-300 text-center shadow-lg border border-blue-600">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <img src="https://truth.debbal.com/assets/img/hero-02.jpg" alt="Digital literacy" class="rounded-xl shadow-2xl w-full max-w-md border-8 border-white">
+                        <div class="absolute -bottom-6 -right-6 bg-blue-100 p-4 rounded-lg shadow-lg hidden md:block">
+                            <div class="flex items-center">
+                                <div class="bg-blue-600 p-3 rounded-full mr-3">
+                                    <i class="fas fa-shield-alt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-blue-800">Verified Content</p>
+                                    <p class="text-sm text-gray-600">Community-driven verification</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <span class="text-blue-600 font-semibold tracking-wider">ABOUT HORIZON TRUTH</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Mission to Fight Misinformation</h2>
+                    <p class="text-gray-700 mb-6 max-w-lg">
+                        Horizon Truth is dedicated to empowering individuals, especially youth, to navigate the digital world responsibly. We believe that in today's fast-paced information age, digital literacy is key to making informed decisions, understanding the truth, and fostering a healthier, more connected society.
+                    </p>
+                    <a href="https://truth.debbal.com/about" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
+                        About More
+                    </a>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-gamepad text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Gamified Learning</h3>
+                            <p class="text-gray-700">Engaging games to teach digital literacy skills in a fun way.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-users text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Community Power</h3>
+                            <p class="text-gray-700">Crowdsourced verification to combat misinformation together.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-graduation-cap text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Educational Resources</h3>
+                            <p class="text-gray-700">Comprehensive materials to improve media literacy.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-trophy text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Reward System</h3>
+                            <p class="text-gray-700">Earn points and recognition for your contributions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-blue-600 font-semibold tracking-wider">EXPLORE OUR TOOLS</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Key Features of Horizon Truth</h2>
+                <p class="text-gray-700">Powerful tools designed to help you identify and combat misinformation effectively.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-gamepad text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Gamified Learning Platform</h3>
+                    <p class="text-gray-700 mb-4">Engage in fun, interactive games to boost digital literacy skills and learn to spot misinformation in an enjoyable way.</p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Read more <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-bullhorn text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Crowdsourced Reporting</h3>
+                    <p class="text-gray-700 mb-4">Flag and verify content through our community-driven reporting system that leverages collective intelligence.</p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Read more <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Community Engagement</h3>
+                    <p class="text-gray-700 mb-4">Earn rewards and recognition for actively combating misinformation and contributing to a more truthful digital space.</p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Read more <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-20 bg-blue-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="font-semibold tracking-wider text-blue-200">HOW IT WORKS</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Start Fighting Misinformation Today</h2>
+                <p class="text-blue-100">Simple steps to become a misinformation warrior and earn rewards.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-blue-700 bg-opacity-30 p-8 rounded-xl">
+                    <div class="text-4xl font-bold text-blue-200 mb-4">01</div>
+                    <h3 class="text-xl font-bold mb-3">Engage in Scenarios</h3>
+                    <p class="text-blue-100">Navigate real-world misinformation challenges to understand how false content spreads in various contexts.</p>
+                </div>
+                
+                <div class="bg-blue-700 bg-opacity-30 p-8 rounded-xl">
+                    <div class="text-4xl font-bold text-blue-200 mb-4">02</div>
+                    <h3 class="text-xl font-bold mb-3">Evaluate Content</h3>
+                    <p class="text-blue-100">Analyze health myths, political manipulation, and social media hoaxes using critical thinking tools.</p>
+                </div>
+                
+                <div class="bg-blue-700 bg-opacity-30 p-8 rounded-xl">
+                    <div class="text-4xl font-bold text-blue-200 mb-4">03</div>
+                    <h3 class="text-xl font-bold mb-3">Earn Rewards</h3>
+                    <p class="text-blue-100">Correctly identifying misinformation earns you points, helping you level up and gain valuable rewards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Join the Fight Against Misinformation?</h2>
+            <p class="text-gray-300 max-w-2xl mx-auto mb-8">Sign up now and start your journey towards becoming a misinformation warrior today.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="https://truth.debbal.com/game" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
+                    Start Playing
+                </a>
+                <a href="https://truth.debbal.com/about" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <img src="https://truth.debbal.com/assets/img/logo.png" alt="Horizon Truth" class="h-10 mb-4">
+                    <p class="mb-4">Empowering minds to identify and combat misinformation through interactive tools and community engagement.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://truth.debbal.com" class="hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="https://truth.debbal.com/about" class="hover:text-white transition duration-300">About Us</a></li>
+                        <li><a href="https://truth.debbal.com/resources" class="hover:text-white transition duration-300">Resources</a></li>
+                        <li><a href="https://truth.debbal.com/game" class="hover:text-white transition duration-300">Game</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://truth.debbal.com/report" class="hover:text-white transition duration-300">Report Misinformation</a></li>
+                        <li><a href="https://truth.debbal.com/news" class="hover:text-white transition duration-300">News & Updates</a></li>
+                        <li><a href="https://truth.debbal.com/contact" class="hover:text-white transition duration-300">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Newsletter</h3>
+                    <p class="mb-4">Subscribe to our newsletter for the latest updates on misinformation trends and prevention.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="bg-gray-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-lg transition duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p>Copyright © 2025 <a href="https://debbal.com" class="text-blue-400 hover:text-blue-300">Debbal</a>. All Rights Reserved</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition duration-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition duration-300">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition duration-300">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
