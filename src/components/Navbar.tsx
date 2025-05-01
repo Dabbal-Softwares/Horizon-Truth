@@ -17,8 +17,6 @@ const Navbar = () => {
               <img src="/assets/img/logo.png" alt="Horizon Truth" className="h-10" />
             </a>
           </div>
-          
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Home</Link>
             <Link to="/about" className="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">About Us</Link>
@@ -28,8 +26,6 @@ const Navbar = () => {
             <Link to="/news" className="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">News</Link>
             <Link to="/contact" className="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300">Contact</Link>
           </div>
-          
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button 
               id="menu-toggle" 
@@ -42,8 +38,6 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-        
-        {/* Mobile Navigation */}
         <div id="mobile-menu" className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden py-4`}>
           <Link to="/" className="block py-2 text-gray-700 hover:text-blue-600">Home</Link>
           <Link to="/about" className="block py-2 text-gray-700 hover:text-blue-600">About Us</Link>

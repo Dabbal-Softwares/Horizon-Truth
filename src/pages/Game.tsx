@@ -1,3 +1,4 @@
+// pages/GamePage.tsx
 import { useState } from "react";
 import useGameState from "../hooks/useGameState";
 import GameHeader from "../components/game/GameHeader";
@@ -6,21 +7,38 @@ import WelcomeScreen from "../components/game/WelcomeScreen";
 import ScenarioScreen from "../components/game/ScenarioScreen";
 import FeedbackScreen from "../components/game/FeedbackScreen";
 import GameComplete from "../components/game/GameComplete";
+import {
+  healthScenarioData,
+  misInformationScenarioData,
+} from "../config/data/scenarios";
 
 const GamePage = () => {
-  const { gameState, startScenario, makeChoice, completeScenario, resetGame } =
+  const { gameState, startScenario, makeChoice, nextQuestion, resetGame } =
     useGameState();
   const [feedback, setFeedback] = useState<any>(null);
 
-  const handleMakeChoice = (choiceId: number) => {
-    const result = makeChoice(choiceId);
+  const handleMakeChoice = (choiceId: number, isCorrect: boolean) => {
+    const result = makeChoice(isCorrect);
     setFeedback(result);
   };
 
   const handleContinue = () => {
-    completeScenario();
+    nextQuestion();
     setFeedback(null);
   };
+
+  const getCurrentQuestion = () => {
+    if (!gameState.currentScenarioType) return null;
+
+    const questions =
+      gameState.currentScenarioType === "social"
+        ? misInformationScenarioData
+        : healthScenarioData;
+
+    return questions[gameState.currentQuestionIndex % questions.length];
+  };
+
+  const currentQuestion = getCurrentQuestion();
 
   return (
     <div
@@ -34,7 +52,7 @@ const GamePage = () => {
         <GameHeader />
 
         <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8 transition-all duration-300">
-          {gameState.completed >= 10 ? (
+          {gameState.questionsAnswered >= 10 ? (
             <GameComplete score={gameState.score} onReset={resetGame} />
           ) : feedback ? (
             <FeedbackScreen
@@ -42,22 +60,28 @@ const GamePage = () => {
               feedback={feedback.feedback}
               onContinue={handleContinue}
             />
-          ) : gameState.currentScenario === 0 ? (
-            <WelcomeScreen onStartScenario={startScenario} />
+          ) : gameState.currentScenarioType ? (
+            currentQuestion && (
+              <ScenarioScreen
+                scenario={currentQuestion}
+                onMakeChoice={handleMakeChoice}
+              />
+            )
           ) : (
-            <ScenarioScreen
-              scenario={gameState.currentScenario}
-              onMakeChoice={handleMakeChoice}
-            />
+            <WelcomeScreen onStartScenario={startScenario} />
           )}
         </div>
 
-        <GameProgress completed={gameState.completed} />
+        <GameProgress
+          completed={gameState.questionsAnswered}
+          total={10}
+          score={gameState.score}
+        />
 
         <footer className="text-center text-gray-600 text-sm">
           <p>
-            © {new Date().getFullYear()} Debbal Truth - Empowering Digital Literacy. All Rights
-            Reserved
+            © {new Date().getFullYear()} Debbal Truth - Empowering Digital
+            Literacy. All Rights Reserved
           </p>
           <div className="flex justify-center space-x-4 mt-2">
             <a href="#" className="hover:text-blue-600">

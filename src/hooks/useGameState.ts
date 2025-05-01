@@ -1,77 +1,77 @@
+// hooks/useGameState.ts
 import { useState } from 'react';
+
+interface Scenario {
+  id: number;
+  type: 'social' | 'health';
+}
 
 const useGameState = () => {
   const [gameState, setGameState] = useState({
-    currentScenario: 0,
+    currentScenarioType: null as 'social' | 'health' | null,
+    currentQuestionIndex: 0,
     score: 0,
     completed: 0,
-    scenarios: [
-      {
-        id: 1,
-        title: "Social Media Misinformation",
-        icon: "users",
-        description: "Learn to spot fake news spreading on platforms like Twitter and Facebook",
-        question: "Social media post about celebrity quitting acting",
-        correctChoices: [1, 4],
-        feedback: {
-          incorrect: "Assuming viral posts are true without verification is how misinformation spreads rapidly.",
-          correct: "Great job investigating the source! Always verify sensational claims with official channels."
-        }
-      },
-      {
-        id: 2,
-        title: "Fake Health News",
-        icon: "heartbeat",
-        description: "Identify dangerous health myths and medical misinformation",
-        question: "Health post about miracle cure",
-        correctChoices: [2, 3],
-        feedback: {
-          incorrect: "Sharing unverified health advice can be dangerous.",
-          correct: "Excellent work checking with medical professionals!"
-        }
-      }
-    ]
+    questionsAnswered: 0,
+    selectedScenario: null as Scenario | null,
   });
 
-  const startScenario = (num:number) => {
+  const startScenario = (type: 'social' | 'health') => {
     setGameState(prev => ({
       ...prev,
-      currentScenario: num
+      currentScenarioType: type,
+      currentQuestionIndex: 0,
+      questionsAnswered: 0,
+      selectedScenario: { id: Date.now(), type } // Simple unique ID
     }));
   };
 
-  const makeChoice = (choiceId:number) => {
-    const currentScenario = gameState.scenarios.find(s => s.id === gameState.currentScenario);
-    const isCorrect = currentScenario?.correctChoices.includes(choiceId);
+  const makeChoice = (isCorrect: boolean) => {
+    const newScore = isCorrect ? gameState.score + 10 : gameState.score;
+    setGameState(prev => ({
+      ...prev,
+      score: newScore,
+      questionsAnswered: prev.questionsAnswered + 1
+    }));
     
-    if (isCorrect) {
-      setGameState(prev => ({
+    return {
+      isCorrect,
+      feedback: isCorrect ? "Correct! Well done!" : "Oops! That's not right."
+    };
+  };
+
+  const nextQuestion = () => {
+    setGameState(prev => {
+      const newIndex = prev.currentQuestionIndex + 1;
+      const completedAll = newIndex >= 10; // Assuming 10 questions per scenario
+      
+      return {
         ...prev,
-        score: prev.score + 10
-      }));
-    }
-    
-    return { isCorrect, feedback: isCorrect ? currentScenario?.feedback.correct : currentScenario?.feedback.incorrect };
-  };
-
-  const completeScenario = () => {
-    setGameState(prev => ({
-      ...prev,
-      completed: prev.completed + 1,
-      currentScenario: 0
-    }));
+        currentQuestionIndex: completedAll ? 0 : newIndex,
+        completed: completedAll ? prev.completed + 1 : prev.completed,
+        currentScenarioType: completedAll ? null : prev.currentScenarioType
+      };
+    });
   };
 
   const resetGame = () => {
-    setGameState(prev => ({
-      ...prev,
+    setGameState({
+      currentScenarioType: null,
+      currentQuestionIndex: 0,
       score: 0,
       completed: 0,
-      currentScenario: 0
-    }));
+      questionsAnswered: 0,
+      selectedScenario: null
+    });
   };
 
-  return { gameState, startScenario, makeChoice, completeScenario, resetGame };
+  return { 
+    gameState, 
+    startScenario, 
+    makeChoice, 
+    nextQuestion, 
+    resetGame 
+  };
 };
 
 export default useGameState;

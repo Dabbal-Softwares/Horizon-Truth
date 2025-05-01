@@ -1,5 +1,5 @@
 interface WelcomeScreenProps {
-  onStartScenario: (scenarioId: number) => void;
+  onStartScenario: (type: "social" | "health") => void;
 }
 
 const WelcomeScreen = ({ onStartScenario }: WelcomeScreenProps) => {
@@ -55,14 +55,14 @@ const WelcomeScreen = ({ onStartScenario }: WelcomeScreenProps) => {
           icon="users"
           title="Social Media Misinformation"
           description="Learn to spot fake news spreading on platforms like Twitter and Facebook"
-          onClick={() => onStartScenario(1)}
+          onClick={() => onStartScenario("social")}
         />
 
         <ScenarioCard
           icon="heartbeat"
           title="Fake Health News"
           description="Identify dangerous health myths and medical misinformation"
-          onClick={() => onStartScenario(2)}
+          onClick={() => onStartScenario("health")}
         />
       </div>
     </div>

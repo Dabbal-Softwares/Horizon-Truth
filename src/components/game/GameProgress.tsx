@@ -1,9 +1,13 @@
+// components/game/GameProgress.tsx
 interface GameProgressProps {
   completed: number;
+  total: number;
+  score: number;
 }
 
-const GameProgress = ({ completed }: GameProgressProps) => {
-  const progress = (completed / 10) * 100;
+const GameProgress = ({ completed, total, score }: GameProgressProps) => {
+  const progress = (completed / total) * 100;
+  const accuracy = completed > 0 ? Math.round((score / (completed * 10)) * 100) : 0;
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
@@ -12,7 +16,7 @@ const GameProgress = ({ completed }: GameProgressProps) => {
           Your Investigator Progress
         </h3>
         <span className="text-sm font-medium text-blue-600">
-          Level 1 Detective
+          Level {Math.floor(completed / 3) + 1} Detective
         </span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-4">
@@ -22,8 +26,8 @@ const GameProgress = ({ completed }: GameProgressProps) => {
         ></div>
       </div>
       <div className="flex justify-between text-sm text-gray-600 mt-2">
-        <span>{completed}/10 scenarios completed</span>
-        <span>{progress}% accuracy</span>
+        <span>{completed}/{total} questions completed</span>
+        <span>{accuracy}% accuracy</span>
       </div>
     </div>
   );
