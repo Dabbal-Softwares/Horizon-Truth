@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <a href="#" className="flex items-center">
-              <img src="/assets/img/logo.png" alt="Horizon Truth" className="h-10" />
+              <img src="/assets/img/logo.png" alt="Debbal Truth" className="h-10" />
             </a>
           </div>
           <div className="hidden md:flex items-center space-x-8">
