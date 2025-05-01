@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +15,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <a href="#" className="flex items-center">
-              <img src="/assets/img/logo.png" alt="Debbal Truth" className="h-10" />
+              <img src={logo} alt="Debbal Truth" className="h-10" />
             </a>
           </div>
           <div className="hidden md:flex items-center space-x-8">

@@ -17,7 +17,7 @@ const GamePage = () => {
     useGameState();
   const [feedback, setFeedback] = useState<any>(null);
 
-  const handleMakeChoice = (choiceId: number, isCorrect: boolean) => {
+  const handleMakeChoice = (_: number, isCorrect: boolean) => {
     const result = makeChoice(isCorrect);
     setFeedback(result);
   };

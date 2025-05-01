@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import GamePage from "./pages/Game";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
 import AboutUsPage from "./pages/About";
@@ -21,7 +20,7 @@ function App() {
     );
   };
   return (
-    <Router>z
+    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/game" element={<GamePage />} />
