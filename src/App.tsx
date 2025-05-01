@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
 import AboutUsPage from "./pages/About";
 import { JSX } from "react";
+import ReportPage from "./pages/Report";
 
 function App() {
   const MainLayout = ({ element }: { element: JSX.Element }) => {
@@ -27,6 +28,10 @@ function App() {
         <Route
           path="/about"
           element={<MainLayout element={<AboutUsPage />} />}
+        />
+        <Route
+          path="/report"
+          element={<MainLayout element={<ReportPage />} />}
         />
       </Routes>
     </Router>
