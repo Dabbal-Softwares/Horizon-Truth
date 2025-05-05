@@ -80,7 +80,7 @@ const GamePage = () => {
 
         <footer className="text-center text-gray-600 text-sm">
           <p>
-            © {new Date().getFullYear()} Debbal Truth - Empowering Digital
+            © {new Date().getFullYear()} Horizon Truth - Empowering Digital
             Literacy. All Rights Reserved
           </p>
           <div className="flex justify-center space-x-4 mt-2">

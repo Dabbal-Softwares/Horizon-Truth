@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import heroImage from '../assets/truth.jpg';
 
 const Hero = () => {
     return (
@@ -10,7 +11,7 @@ const Hero = () => {
                 Empowering Minds, <span className="text-blue-600">Fighting Misinformation</span>
               </h1>
               <p className="text-lg text-white mb-8 max-w-lg">
-                Debbal Truth provides interactive tools and resources to help individuals identify and combat misinformation. Through gamified learning and community-driven verification, we are building a more informed and transparent society.
+                Horizon Truth provides interactive tools and resources to help individuals identify and combat misinformation. Through gamified learning and community-driven verification, we are building a more informed and transparent society.
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                 <Link to="/game" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 text-center shadow-lg">
@@ -23,7 +24,7 @@ const Hero = () => {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="relative">
-                <img src="https://truth.debbal.com/assets/img/hero-02.jpg" alt="Digital literacy" className="rounded-xl shadow-2xl w-full max-w-md border-8 border-white" />
+                <img src={heroImage} alt="Digital literacy" className="rounded-xl shadow-2xl w-full max-w-md border-8 border-white" />
                 <div className="absolute -bottom-6 -right-6 bg-blue-100 p-4 rounded-lg shadow-lg hidden md:block">
                   <div className="flex items-center">
                     <div className="bg-blue-600 p-3 rounded-full mr-3">

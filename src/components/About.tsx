@@ -4,10 +4,10 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center">
             <div className="lg:w-1/2 mb-12 lg:mb-0">
-              <span className="text-blue-600 font-semibold tracking-wider">ABOUT Debbal TRUTH</span>
+              <span className="text-blue-600 font-semibold tracking-wider">ABOUT Horizon Truth</span>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Mission to Fight Misinformation</h2>
               <p className="text-gray-700 mb-6 max-w-lg">
-                Debbal Truth is dedicated to empowering individuals, especially youth, to navigate the digital world responsibly. We believe that in today's fast-paced information age, digital literacy is key to making informed decisions, understanding the truth, and fostering a healthier, more connected society.
+                Horizon Truth is dedicated to empowering individuals, especially youth, to navigate the digital world responsibly. We believe that in today's fast-paced information age, digital literacy is key to making informed decisions, understanding the truth, and fostering a healthier, more connected society.
               </p>
               <a href="/about" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
                 About More

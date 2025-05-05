@@ -4,7 +4,7 @@ const Features = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-blue-600 font-semibold tracking-wider">EXPLORE OUR TOOLS</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Key Features of Debbal Truth</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Key Features of Horizon Truth</h2>
             <p className="text-gray-700">Powerful tools designed to help you identify and combat misinformation effectively.</p>
           </div>
           

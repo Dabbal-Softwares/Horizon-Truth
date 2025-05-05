@@ -10,7 +10,7 @@ const WelcomeScreen = ({ onStartScenario }: WelcomeScreenProps) => {
           <i className="fas fa-info-circle text-blue-600 text-xl"></i>
         </div>
         <h2 className="text-2xl font-bold text-gray-900">
-          Welcome to Debbal Truth's Investigation Game!
+          Welcome to Horizon Truth's Investigation Game!
         </h2>
       </div>
 

@@ -5,7 +5,7 @@ const AboutUsPage = () => {
     <div className="min-h-screen bg-gray-50">
       <section className="relative bg-blue-400 text-white py-20">
         <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">About Debbal Truth</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">About Horizon Truth</h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto">
             Empowering digital citizens to identify and combat misinformation through innovative tools and community engagement.
           </p>
@@ -26,7 +26,7 @@ const AboutUsPage = () => {
             <div className="md:w-1/2 md:pl-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
               <p className="text-lg text-gray-700 mb-6">
-                Debbal Truth provides interactive tools and resources to help individuals identify and combat misinformation. 
+                Horizon Truth provides interactive tools and resources to help individuals identify and combat misinformation. 
                 Through gamified learning and community-driven verification, we are building a more informed and transparent society.
               </p>
               <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
@@ -44,7 +44,7 @@ const AboutUsPage = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Core Values</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              These principles guide everything we do at Debbal Truth
+              These principles guide everything we do at Horizon Truth
             </p>
           </div>
           
