@@ -32,7 +32,7 @@ const FeedbackScreen = ({ isCorrect, feedback, onContinue }:FeedbackScreenProps)
         
         <button 
           onClick={onContinue}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg mx-auto"
+          className="bg-sky-500 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg mx-auto"
         >
           Continue Your Investigation
         </button>

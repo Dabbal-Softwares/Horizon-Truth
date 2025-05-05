@@ -84,13 +84,13 @@ const GamePage = () => {
             Literacy. All Rights Reserved
           </p>
           <div className="flex justify-center space-x-4 mt-2">
-            <a href="#" className="hover:text-blue-600">
+            <a href="#" className="hover:text-sky-500">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-blue-600">
+            <a href="#" className="hover:text-sky-500">
               Terms of Service
             </a>
-            <a href="#" className="hover:text-blue-600">
+            <a href="#" className="hover:text-sky-500">
               Contact Us
             </a>
           </div>

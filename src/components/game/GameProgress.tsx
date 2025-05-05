@@ -15,13 +15,13 @@ const GameProgress = ({ completed, total, score }: GameProgressProps) => {
         <h3 className="text-lg font-semibold text-gray-900">
           Your Investigator Progress
         </h3>
-        <span className="text-sm font-medium text-blue-600">
+        <span className="text-sm font-medium text-sky-500">
           Level {Math.floor(completed / 3) + 1} Detective
         </span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-4">
         <div
-          className="bg-blue-600 h-4 rounded-full transition-all duration-500"
+          className="bg-sky-500 h-4 rounded-full transition-all duration-500"
           style={{ width: `${progress}%` }}
         ></div>
       </div>

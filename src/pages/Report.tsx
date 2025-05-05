@@ -81,7 +81,7 @@ const ReportPage = () => {
                 contactEmail: ''
               });
             }}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg"
+            className="bg-sky-500 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg"
           >
             Submit Another Report
           </button>
@@ -96,7 +96,7 @@ const ReportPage = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <FaExclamationTriangle className="text-blue-600 text-2xl" />
+            <FaExclamationTriangle className="text-sky-500 text-2xl" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Report Misinformation</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -109,7 +109,7 @@ const ReportPage = () => {
           <button
             className={`flex-1 py-4 px-1 text-center border-b-2 font-medium text-lg ${
               activeTab === 'social'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-blue-500 text-sky-500'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
             onClick={() => setActiveTab('social')}
@@ -122,7 +122,7 @@ const ReportPage = () => {
           <button
             className={`flex-1 py-4 px-1 text-center border-b-2 font-medium text-lg ${
               activeTab === 'health'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-blue-500 text-sky-500'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
             onClick={() => setActiveTab('health')}
@@ -141,13 +141,13 @@ const ReportPage = () => {
             <div key={step} className="flex flex-col items-center">
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  reportStep >= step ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
+                  reportStep >= step ? 'bg-sky-500 text-white' : 'bg-gray-200 text-gray-600'
                 } font-semibold`}
               >
                 {step}
               </div>
               <span className={`mt-2 text-sm font-medium ${
-                reportStep >= step ? 'text-blue-600' : 'text-gray-500'
+                reportStep >= step ? 'text-sky-500' : 'text-gray-500'
               }`}>
                 {step === 1 ? 'Details' : step === 2 ? 'Content' : 'Review'}
               </span>
@@ -179,7 +179,7 @@ const ReportPage = () => {
                             type="button"
                             className={`flex items-center justify-center p-3 rounded-lg border ${
                               formData.platform === platform.name
-                                ? 'border-blue-500 bg-blue-50 text-blue-600'
+                                ? 'border-blue-500 bg-blue-50 text-sky-500'
                                 : 'border-gray-300 hover:border-blue-300'
                             } transition-colors`}
                             onClick={() => setFormData({ ...formData, platform: platform.name })}
@@ -219,7 +219,7 @@ const ReportPage = () => {
                             type="button"
                             className={`p-3 rounded-lg border ${
                               formData.category === category
-                                ? 'border-blue-500 bg-blue-50 text-blue-600'
+                                ? 'border-blue-500 bg-blue-50 text-sky-500'
                                 : 'border-gray-300 hover:border-blue-300'
                             } transition-colors text-left`}
                             onClick={() => setFormData({ ...formData, category })}
@@ -258,7 +258,7 @@ const ReportPage = () => {
                     }
                     className={`px-6 py-3 rounded-lg font-medium ${
                       (activeTab === 'social' ? formData.platform : formData.category)
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                        ? 'bg-sky-500 hover:bg-green-700 text-white'
                         : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                     } transition-colors shadow-sm`}
                   >
@@ -339,7 +339,7 @@ const ReportPage = () => {
                         <div className="flex text-sm text-gray-600">
                           <label
                             htmlFor="screenshots"
-                            className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none"
+                            className="relative cursor-pointer bg-white rounded-md font-medium text-sky-500 hover:text-blue-500 focus-within:outline-none"
                           >
                             <span>Upload files</span>
                             <input
@@ -375,7 +375,7 @@ const ReportPage = () => {
                     disabled={!formData.description}
                     className={`px-6 py-3 rounded-lg font-medium ${
                       formData.description
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                        ? 'bg-sky-500 hover:bg-green-700 text-white'
                         : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                     } transition-colors shadow-sm`}
                   >
@@ -461,7 +461,7 @@ const ReportPage = () => {
                   </button>
                   <button
                     type="submit"
-                    className="px-6 py-3 rounded-lg font-medium bg-blue-600 hover:bg-blue-700 text-white transition-colors shadow-sm"
+                    className="px-6 py-3 rounded-lg font-medium bg-sky-500 hover:bg-green-700 text-white transition-colors shadow-sm"
                   >
                     Submit Report
                   </button>

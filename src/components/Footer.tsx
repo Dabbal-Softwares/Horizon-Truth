@@ -39,7 +39,7 @@ const Footer = () => {
               <p className="mb-4">Subscribe to our newsletter for the latest updates on misinformation trends and prevention.</p>
               <form className="flex">
                 <input type="email" placeholder="Your email" className="bg-gray-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" />
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-lg transition duration-300">
+                <button type="submit" className="bg-sky-500 hover:bg-green-700 text-white px-4 py-2 rounded-r-lg transition duration-300">
                   <i className="fas fa-paper-plane"></i>
                 </button>
               </form>

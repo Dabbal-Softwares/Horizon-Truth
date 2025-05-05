@@ -7,7 +7,7 @@ const WelcomeScreen = ({ onStartScenario }: WelcomeScreenProps) => {
     <div className="p-8">
       <div className="flex items-center mb-6">
         <div className="bg-blue-100 p-3 rounded-full mr-4">
-          <i className="fas fa-info-circle text-blue-600 text-xl"></i>
+          <i className="fas fa-info-circle text-sky-500 text-xl"></i>
         </div>
         <h2 className="text-2xl font-bold text-gray-900">
           Welcome to Horizon Truth's Investigation Game!
@@ -22,7 +22,7 @@ const WelcomeScreen = ({ onStartScenario }: WelcomeScreenProps) => {
 
       <div className="bg-blue-50 p-6 rounded-lg mb-8">
         <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-          <i className="fas fa-gamepad text-blue-600 mr-3"></i> How to Play:
+          <i className="fas fa-gamepad text-sky-500 mr-3"></i> How to Play:
         </h3>
         <ul className="space-y-3">
           <li className="flex items-start">
@@ -88,11 +88,11 @@ const ScenarioCard = ({
       onClick={onClick}
     >
       <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-        <i className={`fas fa-${icon} text-blue-600 text-2xl`}></i>
+        <i className={`fas fa-${icon} text-sky-500 text-2xl`}></i>
       </div>
       <h4 className="text-lg font-bold text-gray-900 mb-2">{title}</h4>
       <p className="text-gray-600 mb-4">{description}</p>
-      <span className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">
+      <span className="inline-block bg-sky-500 text-white px-4 py-2 rounded-lg font-medium">
         Start Investigation
       </span>
     </div>

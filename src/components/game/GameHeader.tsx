@@ -3,7 +3,7 @@ const GameHeader = () => {
       <header className="text-center mb-12">
         <div className="flex justify-center mb-6">
           <div className="bg-blue-100 p-4 rounded-full">
-            <i className="fas fa-search text-blue-600 text-4xl"></i>
+            <i className="fas fa-search text-sky-500 text-4xl"></i>
           </div>
         </div>
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Misinformation Investigator Game</h1>

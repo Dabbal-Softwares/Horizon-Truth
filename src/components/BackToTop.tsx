@@ -29,7 +29,7 @@ const BackToTop = () => {
   return (
     <button 
       id="back-to-top" 
-      className={`fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 ${isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+      className={`fixed bottom-8 right-8 bg-sky-500 text-white p-3 rounded-full shadow-lg transition-all duration-300 ${isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
       onClick={scrollToTop}
     >
       <i className="fas fa-arrow-up"></i>

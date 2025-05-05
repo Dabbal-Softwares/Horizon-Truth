@@ -13,7 +13,7 @@ const ScenarioScreen = ({ scenario, onMakeChoice }: ScenarioScreenProps) => {
     <div className="p-8">
       <div className="flex items-center mb-6">
         <div className="bg-blue-100 p-3 rounded-full mr-4">
-          <i className={`fas fa-${scenario.icon} text-blue-600 text-xl`}></i>
+          <i className={`fas fa-${scenario.icon} text-sky-500 text-xl`}></i>
         </div>
         <h2 className="text-2xl font-bold text-gray-900">
           {scenario.title}

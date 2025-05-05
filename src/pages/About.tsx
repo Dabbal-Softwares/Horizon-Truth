@@ -3,7 +3,7 @@ import { FaShieldAlt, FaUsers, FaGraduationCap, FaTrophy } from 'react-icons/fa'
 const AboutUsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
-      <section className="relative bg-blue-400 text-white py-20">
+      <section className="relative bg-sky-400 text-white py-20">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">About Horizon Truth</h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto">
@@ -51,7 +51,7 @@ const AboutUsPage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <FaShieldAlt className="text-blue-600 text-2xl" />
+                <FaShieldAlt className="text-sky-500 text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">Truth</h3>
               <p className="text-gray-600 text-center">
@@ -61,7 +61,7 @@ const AboutUsPage = () => {
             
             <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <FaUsers className="text-blue-600 text-2xl" />
+                <FaUsers className="text-sky-500 text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">Community</h3>
               <p className="text-gray-600 text-center">
@@ -71,7 +71,7 @@ const AboutUsPage = () => {
             
             <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <FaGraduationCap className="text-blue-600 text-2xl" />
+                <FaGraduationCap className="text-sky-500 text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">Education</h3>
               <p className="text-gray-600 text-center">
@@ -81,7 +81,7 @@ const AboutUsPage = () => {
             
             <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <FaTrophy className="text-blue-600 text-2xl" />
+                <FaTrophy className="text-sky-500 text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">Empowerment</h3>
               <p className="text-gray-600 text-center">
@@ -130,7 +130,7 @@ const AboutUsPage = () => {
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900">{member.name}</h3>
-                  <p className="text-blue-600 font-medium mb-3">{member.role}</p>
+                  <p className="text-sky-500 font-medium mb-3">{member.role}</p>
                   <p className="text-gray-600">{member.bio}</p>
                 </div>
               </div>
@@ -139,7 +139,7 @@ const AboutUsPage = () => {
         </div>
       </section>
       
-      <section className="py-16 bg-blue-600 text-white">
+      <section className="py-16 bg-sky-500 text-white">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to Join the Fight Against Misinformation?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
@@ -148,13 +148,13 @@ const AboutUsPage = () => {
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <a 
               href="/game" 
-              className="bg-white hover:bg-gray-100 text-blue-600 font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg inline-block"
+              className="bg-white hover:bg-gray-100 text-sky-500 font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg inline-block"
             >
               Play Our Game
             </a>
             <a 
               href="/resources" 
-              className="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg inline-block"
+              className="bg-green-700 hover:bg-green-800 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg inline-block"
             >
               Explore Resources
             </a>
