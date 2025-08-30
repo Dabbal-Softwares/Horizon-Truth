@@ -6,7 +6,9 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
 import AboutUsPage from "./pages/About";
-import ReportPage from "./pages/Report";
+import ResourcesPage from "./pages/Resources";
+import ReportingPage from "./pages/Reporting";
+import ContactUsPage from "./pages/ContactUs";
 
 function MainLayout() {
   return (
@@ -36,8 +38,16 @@ export const router = createBrowserRouter([
         element: <AboutUsPage />,
       },
       {
+        path: "resources",
+        element: <ResourcesPage />,
+      },
+      {
         path: "report",
-        element: <ReportPage />,
+        element: <ReportingPage />,
+      },
+      {
+        path: "contact",
+        element: <ContactUsPage />,
       },
     ],
   },
