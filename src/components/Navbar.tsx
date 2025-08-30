@@ -24,7 +24,7 @@ const Navbar = () => {
             <Link to="/resources" className="nav-link text-gray-700 hover:text-sky-500 font-medium transition duration-300">Resources</Link>
             <Link to="/report" className="nav-link text-gray-700 hover:text-sky-500 font-medium transition duration-300">Report</Link>
             <Link to="/game" className="nav-link text-gray-700 hover:text-sky-500 font-medium transition duration-300">Game</Link>
-            <Link to="/news" className="nav-link text-gray-700 hover:text-sky-500 font-medium transition duration-300">News</Link>
+            {/* <Link to="/news" className="nav-link text-gray-700 hover:text-sky-500 font-medium transition duration-300">News</Link> */}
             <Link to="/contact" className="nav-link text-gray-700 hover:text-sky-500 font-medium transition duration-300">Contact</Link>
           </div>
           <div className="md:hidden">
@@ -45,7 +45,7 @@ const Navbar = () => {
           <Link to="/resources" className="block py-2 text-gray-700 hover:text-sky-500">Resources</Link>
           <Link to="/report" className="block py-2 text-gray-700 hover:text-sky-500">Report</Link>
           <Link to="/game" className="block py-2 text-gray-700 hover:text-sky-500">Game</Link>
-          <Link to="/news" className="block py-2 text-gray-700 hover:text-sky-500">News</Link>
+          {/* <Link to="/news" className="block py-2 text-gray-700 hover:text-sky-500">News</Link> */}
           <Link to="/contact" className="block py-2 text-gray-700 hover:text-sky-500">Contact</Link>
         </div>
       </div>
