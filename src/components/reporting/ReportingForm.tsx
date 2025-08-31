@@ -1,4 +1,65 @@
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import InputField from '../ui/InputField';
+import { Checkbox, CheckboxGroup } from '../ui/CheckboxField';
+import FileUpload from '../ui/FileUpload';
+
+const reportFormSchema = z.object({
+  url: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
+  description: z.string().min(10, 'Description must be at least 10 characters'),
+  evidence: z.string().optional(),
+  categories: z.array(z.string()).min(1, 'Please select at least one category'),
+  screenshots: z.any().optional(),
+  termsAgreement: z.boolean().refine(val => val === true, 'You must agree to the terms')
+});
+
+type ReportFormData = z.infer<typeof reportFormSchema>;
+
+const formFields = {
+  url: {
+    type: 'url',
+    label: 'Content URL (if applicable)',
+    placeholder: 'https://example.com/questionable-article',
+    optional: true
+  },
+  description: {
+    type: 'textarea',
+    label: 'Describe the content and why you believe it may be misinformation',
+    placeholder: 'Provide details about where you saw this content, what claims it makes, and why you suspect it might be misleading...',
+    rows: 4
+  },
+  evidence: {
+    type: 'textarea',
+    label: 'Supporting evidence or sources',
+    placeholder: 'Share any sources you\'ve already checked or evidence that supports your concerns...',
+    rows: 3,
+    optional: true
+  }
+};
+
+const categories = [
+  { id: 'health', label: 'Health/Medical' },
+  { id: 'political', label: 'Political' },
+  { id: 'science', label: 'Science/Tech' },
+  { id: 'social', label: 'Social Issues' },
+  { id: 'financial', label: 'Financial' },
+  { id: 'other', label: 'Other' }
+];
+
 const ReportingForm = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm<ReportFormData>({
+    resolver: zodResolver(reportFormSchema),
+    defaultValues: {
+      categories: []
+    }
+  });
+
+  const onSubmit = (data: ReportFormData) => {
+    console.log('Form submitted:', data);
+    // Handle form submission here
+  };
+
   return (
     <section id="report-form" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -11,139 +72,61 @@ const ReportingForm = () => {
             </p>
           </div>
 
-          <form className="p-6 space-y-6">
-            <div>
-              <label
-                htmlFor="report-url"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                Content URL (if applicable)
-              </label>
-              <input
-                type="url"
-                id="report-url"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                placeholder="https://example.com/questionable-article"
-              />
-            </div>
+          <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
+            <InputField
+              id="url"
+              type="url"
+              label={formFields.url.label}
+              placeholder={formFields.url.placeholder}
+              optional={formFields.url.optional}
+              register={register}
+              errors={errors}
+            />
 
-            <div>
-              <label
-                htmlFor="report-description"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                Describe the content and why you believe it may be
-                misinformation
-              </label>
-              <textarea
-                id="report-description"
-                rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                placeholder="Provide details about where you saw this content, what claims it makes, and why you suspect it might be misleading..."
-              ></textarea>
-            </div>
+            <InputField
+              id="description"
+              type="textarea"
+              label={formFields.description.label}
+              placeholder={formFields.description.placeholder}
+              rows={formFields.description.rows}
+              register={register}
+              errors={errors}
+            />
 
-            <div>
-              <label
-                htmlFor="report-evidence"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                Supporting evidence or sources
-              </label>
-              <textarea
-                id="report-evidence"
-                rows={3}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                placeholder="Share any sources you've already checked or evidence that supports your concerns..."
-              ></textarea>
-            </div>
+            <InputField
+              id="evidence"
+              type="textarea"
+              label={formFields.evidence.label}
+              placeholder={formFields.evidence.placeholder}
+              rows={formFields.evidence.rows}
+              optional={formFields.evidence.optional}
+              register={register}
+              errors={errors}
+            />
 
-            <div>
-              <label className="block text-gray-700 font-medium mb-2">
-                Category of content
-              </label>
-              <div className="grid grid-cols-2 gap-4">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="rounded text-sky-500 focus:ring-sky-500"
-                  />
-                  <span className="ml-2 text-gray-700">Health/Medical</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="rounded text-sky-500 focus:ring-sky-500"
-                  />
-                  <span className="ml-2 text-gray-700">Political</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="rounded text-sky-500 focus:ring-sky-500"
-                  />
-                  <span className="ml-2 text-gray-700">Science/Tech</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="rounded text-sky-500 focus:ring-sky-500"
-                  />
-                  <span className="ml-2 text-gray-700">Social Issues</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="rounded text-sky-500 focus:ring-sky-500"
-                  />
-                  <span className="ml-2 text-gray-700">Financial</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="rounded text-sky-500 focus:ring-sky-500"
-                  />
-                  <span className="ml-2 text-gray-700">Other</span>
-                </label>
-              </div>
-            </div>
+            <CheckboxGroup
+              id="categories"
+              label="Category of content"
+              options={categories}
+              register={register}
+              errors={errors}
+            />
 
-            <div>
-              <label className="block text-gray-700 font-medium mb-2">
-                Upload screenshots (optional)
-              </label>
-              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
-                <div className="space-y-1 text-center">
-                  <div className="flex text-sm text-gray-600 justify-center">
-                    <label className="relative cursor-pointer bg-white rounded-md font-medium text-sky-500 hover:text-sky-400 focus-within:outline-none">
-                      <span>Upload files</span>
-                      <input type="file" className="sr-only" multiple />
-                    </label>
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    PNG, JPG, GIF up to 10MB
-                  </p>
-                </div>
-              </div>
-            </div>
+            <FileUpload
+              id="screenshots"
+              label="Upload screenshots (optional)"
+              register={register}
+              errors={errors}
+            />
 
-            <div className="flex items-center">
-              <input
-                id="terms-agreement"
-                type="checkbox"
-                className="h-4 w-4 text-sky-500 focus:ring-sky-500 border-gray-300 rounded"
-              />
-              <label
-                htmlFor="terms-agreement"
-                className="ml-2 block text-sm text-gray-700"
-              >
-                I agree to the{" "}
-                <a href="#" className="text-sky-500 hover:text-sky-600">
-                  Terms of Service
-                </a>{" "}
-                and confirm that I'm submitting this report in good faith.
-              </label>
-            </div>
+            <Checkbox
+              id="termsAgreement"
+              label="I agree to the Terms of Service and confirm that I'm submitting this report in good faith."
+              linkText="Terms of Service"
+              linkUrl="#"
+              register={register}
+              errors={errors}
+            />
 
             <div>
               <button

@@ -1,10 +1,12 @@
+import logo from '../assets/logo.png';
+
 const Footer = () => {
     return (
       <footer className="bg-gray-800 text-gray-300 py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <img src="/assets/img/logo.png" alt="Horizon Truth" className="h-10 mb-4" />
+              <img src={logo} alt="Horizon Truth" className="h-10 mb-4" />
               <p className="mb-4">Empowering minds to identify and combat misinformation through interactive tools and community engagement.</p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white transition duration-300"><i className="fab fa-facebook-f"></i></a>
