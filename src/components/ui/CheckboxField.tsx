@@ -4,9 +4,10 @@ interface CheckboxGroupProps {
   options: { id: string; label: string }[];
   register: any;
   errors: any;
+  disabled?: boolean;
 }
 
-export const CheckboxGroup = ({ id, label, options, register, errors }: CheckboxGroupProps) => {
+export const CheckboxGroup = ({ id, label, options, register, errors, disabled = false }: CheckboxGroupProps) => {
   return (
     <div>
       <label className="block text-gray-700 font-medium mb-2">{label}</label>
@@ -16,6 +17,7 @@ export const CheckboxGroup = ({ id, label, options, register, errors }: Checkbox
             <input
               type="checkbox"
               value={option.id}
+              disabled={disabled}
               className="rounded text-sky-500 focus:ring-sky-500"
               {...register(id)}
             />
@@ -37,14 +39,16 @@ interface CheckboxProps {
   errors: any;
   linkText?: string;
   linkUrl?: string;
+  disabled?: boolean;
 }
 
-export const Checkbox = ({ id, label, register, errors, linkText, linkUrl }: CheckboxProps) => {
+export const Checkbox = ({ id, label, register, errors, linkText, linkUrl, disabled = false }: CheckboxProps) => {
   return (
     <div className="flex items-start">
       <input
         id={id}
         type="checkbox"
+        disabled={disabled}
         className="h-4 w-4 mt-1 text-sky-500 focus:ring-sky-500 border-gray-300 rounded"
         {...register(id)}
       />

@@ -38,8 +38,7 @@ const GamePage = () => {
     startGame, 
     selectChoice, 
     completeGame,
-    resetGame: resetSession,
-    sessionHistory 
+    resetGame: resetSession
   } = useGameSessionStore();
 
   // Load saved answers from localStorage on component mount
