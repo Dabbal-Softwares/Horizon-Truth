@@ -5,8 +5,8 @@ import InputField from '../ui/InputField';
 import { Checkbox } from '../ui/CheckboxField';
 import SelectField from '../ui/SelectField';
 
+const API_URL = import.meta.env.VITE_API_URL;
 
-// Define validation schema with Zod
 const contactFormSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
@@ -17,10 +17,9 @@ const contactFormSchema = z.object({
   consent: z.boolean().refine(val => val === true, 'You must consent to continue')
 });
 
-// Infer TypeScript type from Zod schema
+
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
-// Define subject options
 const subjectOptions = [
   { value: '', label: 'Select a subject' },
   { value: 'general', label: 'General Inquiry' },
@@ -33,7 +32,7 @@ const subjectOptions = [
 ];
 
 const ContactForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<ContactFormData>({
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
       phone: '',
@@ -41,9 +40,29 @@ const ContactForm = () => {
     }
   });
 
-  const onSubmit = (data: ContactFormData) => {
-    console.log('Form submitted:', data);
-    // Handle form submission here
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      const response = await fetch(`${API_URL}/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Form submitted successfully:', result);
+      
+      reset();
+      alert('Message sent successfully! We will get back to you soon.');
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error sending your message. Please try again.');
+    }
   };
 
   return (
@@ -122,9 +141,10 @@ const ContactForm = () => {
             <div>
               <button 
                 type="submit" 
-                className="w-full bg-sky-500 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg"
+                disabled={isSubmitting}
+                className="w-full bg-sky-500 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </div>
           </form>
