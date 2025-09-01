@@ -55,7 +55,6 @@ const ContactForm = () => {
       }
 
       const result = await response.json();
-      console.log('Form submitted successfully:', result);
       
       reset();
       alert('Message sent successfully! We will get back to you soon.');

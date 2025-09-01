@@ -39,6 +39,7 @@ interface GameState {
     }) => Promise<void>;
 
     updateGuestQuestionResult: (data: {
+        sessionId: string;
         categoryId: string;
         score: number;
         isCorrect: boolean;
@@ -68,6 +69,7 @@ interface GameState {
     }) => Promise<void>;
 
     createProgress: (data: {
+        sessionId: string;
         userId: string;
         scenarioId: string;
         categoryId: string;
@@ -198,7 +200,6 @@ export const useGameStore = create<GameState>()(
                     }
 
                     const response = await api.get('/game/scenarios', { params: filters });
-                    console.log("Fetched scenarios:", response.data.data.data);
                     set({ scenarios: response.data?.data?.data || response.data?.data || response.data, isLoading: false });
                 } catch (error: any) {
                     set({ error: error.response?.data?.message || error.message, isLoading: false });
@@ -292,6 +293,7 @@ export const useGameStore = create<GameState>()(
                     } else {
                         // For guests, use the guest progress endpoint
                         await get().updateGuestQuestionResult({
+                            sessionId: data.sessionId,
                             categoryId: data.categoryId,
                             score: data.score,
                             isCorrect: true, // You might need to adjust this

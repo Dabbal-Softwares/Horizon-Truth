@@ -8,6 +8,7 @@ import WelcomeScreen from '../components/game/WelcomeScreen';
 import GameProgress from '../components/game/GameProgress';
 import { useGameSessionStore } from '../store/game-session.store';
 import { useAuthStore } from '../store/auth.store';
+import { guestService } from '../services/guestService';
 
 // Define interface for local answer storage
 interface LocalAnswer {
@@ -23,6 +24,7 @@ const GamePage = () => {
   const [feedback, setFeedback] = useState<{ isCorrect: boolean; message: string } | null>(null);
   const [localAnswers, setLocalAnswers] = useState<LocalAnswer[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [guestSessionId, setGuestSessionId] = useState<string | null>(null);
   
   // Zustand stores
   const { 
@@ -46,8 +48,32 @@ const GamePage = () => {
 
   const { user, isAuthenticated, isGuest } = useAuthStore();
 
-  // Load saved answers from localStorage on component mount
+  // Initialize guest session on component mount for guest users
   useEffect(() => {
+    const initializeGuestSession = async () => {
+      if (isGuest && !guestSessionId) {
+        try {
+          const session = await guestService.createSession();
+          setGuestSessionId(session.id);
+          localStorage.setItem('guestSessionId', session.id);
+        } catch (error) {
+          console.error('Error creating guest session:', error);
+        }
+      }
+    };
+
+    initializeGuestSession();
+  }, [isGuest, guestSessionId]);
+
+  // Load saved data from localStorage on component mount
+  useEffect(() => {
+    // Load guest session ID
+    const savedGuestSessionId = localStorage.getItem('guestSessionId');
+    if (savedGuestSessionId) {
+      setGuestSessionId(savedGuestSessionId);
+    }
+
+    // Load saved answers
     const savedAnswers = localStorage.getItem('gameLocalAnswers');
     if (savedAnswers) {
       try {
@@ -64,7 +90,7 @@ const GamePage = () => {
     }
   }, []);
 
-  // Save answers to localStorage whenever they change
+  // Save data to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem('gameLocalAnswers', JSON.stringify(localAnswers));
   }, [localAnswers]);
@@ -128,15 +154,16 @@ const GamePage = () => {
 
     // Update question result in backend
     try {
-      if (isAuthenticated) {
+      if (isAuthenticated && user) {
         await updateQuestionResult({
-          userId: user?.id || 'current-user-id',
+          userId: user.id,
           categoryId: scenario.categoryId,
           score,
           isCorrect: isCorrectAnswer
         });
-      } else if (isGuest) {
+      } else if (isGuest && guestSessionId) {
         await updateGuestQuestionResult({
+          sessionId: guestSessionId,
           categoryId: scenario.categoryId,
           score,
           isCorrect: isCorrectAnswer,
@@ -160,14 +187,15 @@ const GamePage = () => {
         // Complete the current scenario
         if (currentSession) {
           const scenario = currentSession.currentScenario;
-          if (isAuthenticated) {
+          if (isAuthenticated && user) {
             await completeScenario({
-              userId: user?.id || 'current-user-id',
+              userId: user.id,
               categoryId: scenario.categoryId,
               scenarioId: scenario.id
             });
-          } else if (isGuest) {
+          } else if (isGuest && guestSessionId) {
             await completeGuestScenario({
+              sessionId: guestSessionId,
               categoryId: scenario.categoryId,
               scenarioId: scenario.id
             });
@@ -196,11 +224,27 @@ const GamePage = () => {
     }
   };
 
-  const handleResetGame = () => {
+  const handleResetGame = async () => {
     resetSession();
     setFeedback(null);
     setLocalAnswers([]);
     localStorage.removeItem('gameLocalAnswers');
+    
+    // For guest users, also reset the session on the server
+    if (isGuest && guestSessionId) {
+      try {
+        await guestService.deleteSession(guestSessionId);
+        localStorage.removeItem('guestSessionId');
+        setGuestSessionId(null);
+        
+        // Create a new guest session
+        const newSession = await guestService.createSession();
+        setGuestSessionId(newSession.id);
+        localStorage.setItem('guestSessionId', newSession.id);
+      } catch (error) {
+        console.error('Error resetting guest session:', error);
+      }
+    }
   };
 
   // Calculate game progress based on local answers

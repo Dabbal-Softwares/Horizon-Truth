@@ -91,7 +91,6 @@ const ReportingForm = () => {
     try {
       clearError();
       clearMessage();
-      console.log("report data : ", data);
 
       if (!isAuthenticated && !isGuest) {
         toast.error("Please log in or continue as guest to submit a report");
