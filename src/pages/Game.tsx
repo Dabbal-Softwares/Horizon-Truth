@@ -7,6 +7,7 @@ import ScenarioScreen from '../components/game/ScenarioScreen';
 import WelcomeScreen from '../components/game/WelcomeScreen';
 import GameProgress from '../components/game/GameProgress';
 import { useGameSessionStore } from '../store/game-session.store';
+import { useAuthStore } from '../store/auth.store';
 
 // Define interface for local answer storage
 interface LocalAnswer {
@@ -30,7 +31,9 @@ const GamePage = () => {
     updateQuestionResult, 
     completeScenario,
     categories,
-    fetchCategories
+    fetchCategories,
+    updateGuestQuestionResult,
+    completeGuestScenario
   } = useGameStore();
   
   const { 
@@ -40,6 +43,8 @@ const GamePage = () => {
     completeGame,
     resetGame: resetSession
   } = useGameSessionStore();
+
+  const { user, isAuthenticated, isGuest } = useAuthStore();
 
   // Load saved answers from localStorage on component mount
   useEffect(() => {
@@ -67,18 +72,17 @@ const GamePage = () => {
   const handleStartScenario = async (categoryId: string) => {
     try {
       await fetchScenarios({ categoryId });
-      const categoryScenarios = scenarios;
       
-      if (categoryScenarios.length > 0) {
+      if (scenarios.length > 0) {
         // Filter out scenarios that have already been answered
-        const unansweredScenarios = categoryScenarios.filter(
+        const unansweredScenarios = scenarios.filter(
           scenario => !localAnswers.some(answer => answer.scenarioId === scenario.id)
         );
         
         // Use an unanswered scenario if available, otherwise use any scenario
         const selectedScenario = unansweredScenarios.length > 0 
           ? unansweredScenarios[Math.floor(Math.random() * unansweredScenarios.length)]
-          : categoryScenarios[Math.floor(Math.random() * categoryScenarios.length)];
+          : scenarios[Math.floor(Math.random() * scenarios.length)];
         
         startGame(selectedScenario);
       }
@@ -87,7 +91,7 @@ const GamePage = () => {
     }
   };
 
-  const handleMakeChoice = (choiceId: number) => {
+  const handleMakeChoice = async (choiceId: number) => {
     if (!currentSession) return;
 
     // Update session with selected choice
@@ -121,6 +125,27 @@ const GamePage = () => {
       isCorrect: isCorrectAnswer,
       message: feedbackMessage
     });
+
+    // Update question result in backend
+    try {
+      if (isAuthenticated) {
+        await updateQuestionResult({
+          userId: user?.id || 'current-user-id',
+          categoryId: scenario.categoryId,
+          score,
+          isCorrect: isCorrectAnswer
+        });
+      } else if (isGuest) {
+        await updateGuestQuestionResult({
+          categoryId: scenario.categoryId,
+          score,
+          isCorrect: isCorrectAnswer,
+          scenarioId: scenario.id
+        });
+      }
+    } catch (error) {
+      console.error('Error updating question result:', error);
+    }
   };
 
   const handleContinue = async () => {
@@ -132,17 +157,24 @@ const GamePage = () => {
     // If this was the 10th question, complete the game
     if (localAnswers.length >= 10) {
       try {
-        // Submit all local answers to backend
-        await submitAllAnswers();
+        // Complete the current scenario
+        if (currentSession) {
+          const scenario = currentSession.currentScenario;
+          if (isAuthenticated) {
+            await completeScenario({
+              userId: user?.id || 'current-user-id',
+              categoryId: scenario.categoryId,
+              scenarioId: scenario.id
+            });
+          } else if (isGuest) {
+            await completeGuestScenario({
+              categoryId: scenario.categoryId,
+              scenarioId: scenario.id
+            });
+          }
+        }
         
         completeGame();
-        if (currentSession) {
-          completeScenario({
-            userId: 'current-user-id',
-            categoryId: currentSession.currentScenario.categoryId,
-            scenarioId: currentSession.currentScenario.id
-          });
-        }
       } catch (error) {
         console.error('Error completing game:', error);
       } finally {
@@ -164,27 +196,6 @@ const GamePage = () => {
     }
   };
 
-  const submitAllAnswers = async () => {
-    try {
-      // Submit all locally stored answers to the backend
-      for (const answer of localAnswers) {
-        await updateQuestionResult({
-          userId: 'current-user-id',
-          categoryId: answer.categoryId,
-          score: answer.score,
-          isCorrect: answer.isCorrect
-        });
-      }
-      
-      // Clear local answers after successful submission
-      setLocalAnswers([]);
-      localStorage.removeItem('gameLocalAnswers');
-    } catch (error) {
-      console.error('Error submitting answers:', error);
-      throw error; // Re-throw to handle in calling function
-    }
-  };
-
   const handleResetGame = () => {
     resetSession();
     setFeedback(null);
@@ -195,6 +206,11 @@ const GamePage = () => {
   // Calculate game progress based on local answers
   const questionsCompleted = localAnswers.length;
   const totalScore = localAnswers.reduce((total, answer) => total + answer.score, 0);
+  
+  // Calculate accuracy
+  const correctAnswers = localAnswers.filter(answer => answer.isCorrect).length;
+  const accuracy = questionsCompleted > 0 ? Math.round((correctAnswers / questionsCompleted) * 100) : 0;
+  
   const isGameComplete = questionsCompleted >= 10;
 
   return (
@@ -212,6 +228,7 @@ const GamePage = () => {
           {isGameComplete ? (
             <GameComplete 
               score={totalScore} 
+              accuracy={accuracy}
               onReset={handleResetGame} 
             />
           ) : feedback ? (
@@ -241,6 +258,7 @@ const GamePage = () => {
             completed={questionsCompleted}
             total={10}
             score={totalScore}
+            accuracy={accuracy}
           />
         )}
 

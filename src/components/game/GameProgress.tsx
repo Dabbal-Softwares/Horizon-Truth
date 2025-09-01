@@ -2,11 +2,11 @@ interface GameProgressProps {
   completed: number;
   total: number;
   score: number;
+  accuracy: number;
 }
 
-const GameProgress = ({ completed, total, score }: GameProgressProps) => {
+const GameProgress = ({ completed, total, score, accuracy }: GameProgressProps) => {
   const progress = (completed / total) * 100;
-  const accuracy = completed > 0 ? Math.round((score / (completed * 10)) * 100) : 0;
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 mb-8">

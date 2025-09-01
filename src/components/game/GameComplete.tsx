@@ -1,19 +1,22 @@
 import { useEffect } from "react";
 import { useGameStore } from "../../store/game.store";
+import { useAuthStore } from "../../store/auth.store";
 
 interface GameCompleteProps {
   score: number;
+  accuracy: number;
   onReset: () => void;
 }
 
-const GameComplete = ({ score, onReset }: GameCompleteProps) => {
+const GameComplete = ({ score, accuracy, onReset }: GameCompleteProps) => {
   const { gameStats, getUserStats } = useGameStore();
+  const { user } = useAuthStore();
 
   useEffect(() => {
-    getUserStats('current-user-id');
-  }, [getUserStats]);
-
-  const accuracy = gameStats ? Math.round(gameStats.overallAccuracy * 100) : 0;
+    if (user) {
+      getUserStats(user.id);
+    }
+  }, [getUserStats, user]);
 
   return (
     <div className="p-12 text-center">
@@ -33,19 +36,19 @@ const GameComplete = ({ score, onReset }: GameCompleteProps) => {
           <div className="grid grid-cols-2 gap-4 text-left">
             <div>
               <p className="text-gray-600">Total Score</p>
-              <p className="text-2xl font-bold text-sky-600">{gameStats.totalScore}</p>
+              <p className="text-2xl font-bold text-sky-600">{gameStats.totalScore || score}</p>
             </div>
             <div>
               <p className="text-gray-600">Accuracy</p>
-              <p className="text-2xl font-bold text-green-600">{accuracy}%</p>
+              <p className="text-2xl font-bold text-green-600">{gameStats.overallAccuracy ? Math.round(gameStats.overallAccuracy * 100) : accuracy}%</p>
             </div>
             <div>
               <p className="text-gray-600">Questions Answered</p>
-              <p className="text-2xl font-bold text-blue-600">{gameStats.totalQuestionsAnswered}</p>
+              <p className="text-2xl font-bold text-blue-600">{gameStats.totalQuestionsAnswered || 10}</p>
             </div>
             <div>
               <p className="text-gray-600">Scenarios Completed</p>
-              <p className="text-2xl font-bold text-purple-600">{gameStats.totalScenariosCompleted}</p>
+              <p className="text-2xl font-bold text-purple-600">{gameStats.totalScenariosCompleted || 1}</p>
             </div>
           </div>
         </div>
