@@ -39,12 +39,12 @@ const formFields = {
 };
 
 const categories = [
-  { id: 'health', label: 'Health/Medical' },
-  { id: 'political', label: 'Political' },
-  { id: 'science', label: 'Science/Tech' },
-  { id: 'social', label: 'Social Issues' },
-  { id: 'financial', label: 'Financial' },
-  { id: 'other', label: 'Other' }
+  { id:'1', keyword: 'health', label: 'Health/Medical' },
+  { id:'2', keyword: 'political', label: 'Political' },
+  { id:'3', keyword: 'science', label: 'Science/Tech' },
+  { id:'4', keyword: 'social', label: 'Social Issues' },
+  { id:'5', keyword: 'financial', label: 'Financial' },
+  { id:'6', keyword: 'other', label: 'Other' }
 ];
 
 const ReportingForm = () => {

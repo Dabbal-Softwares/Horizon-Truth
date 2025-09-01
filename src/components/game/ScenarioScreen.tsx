@@ -1,14 +1,14 @@
-import { ScenarioData } from "../../config/data/scenarios";
+import { GameScenario } from "../../types/game";
 import ChoiceCard from "./ChoiceCard";
 import SocialPost from "./SocialPost";
 
-
 interface ScenarioScreenProps {
-  scenario: ScenarioData;
+  scenario: GameScenario;
+  selectedChoices: number[];
   onMakeChoice: (choiceId: number, isCorrect: boolean) => void;
 }
 
-const ScenarioScreen = ({ scenario, onMakeChoice }: ScenarioScreenProps) => {
+const ScenarioScreen = ({ scenario, selectedChoices, onMakeChoice }: ScenarioScreenProps) => {
   return (
     <div className="p-8">
       <div className="flex items-center mb-6">
@@ -35,6 +35,7 @@ const ScenarioScreen = ({ scenario, onMakeChoice }: ScenarioScreenProps) => {
             color={choice.color}
             title={choice.title}
             description={choice.description}
+            isSelected={selectedChoices.includes(choice.id)}
             onClick={() => onMakeChoice(choice.id, choice.isCorrect)}
           />
         ))}

@@ -1,8 +1,11 @@
+import { Category } from "../../types/game";
+
 interface WelcomeScreenProps {
-  onStartScenario: (type: "social" | "health") => void;
+  onStartScenario: (categoryId: string) => void;
+  categories: Category[];
 }
 
-const WelcomeScreen = ({ onStartScenario }: WelcomeScreenProps) => {
+const WelcomeScreen = ({ onStartScenario, categories }: WelcomeScreenProps) => {
   return (
     <div className="p-8">
       <div className="flex items-center mb-6">
@@ -51,19 +54,15 @@ const WelcomeScreen = ({ onStartScenario }: WelcomeScreenProps) => {
       </h3>
 
       <div className="grid md:grid-cols-2 gap-6">
-        <ScenarioCard
-          icon="users"
-          title="Social Media Misinformation"
-          description="Learn to spot fake news spreading on platforms like Twitter and Facebook"
-          onClick={() => onStartScenario("social")}
-        />
-
-        <ScenarioCard
-          icon="heartbeat"
-          title="Fake Health News"
-          description="Identify dangerous health myths and medical misinformation"
-          onClick={() => onStartScenario("health")}
-        />
+        {categories && categories.map((category) => (
+          <ScenarioCard
+            key={category.id}
+            icon={category.icon}
+            title={category.label}
+            description={`Explore ${category.label} misinformation scenarios`}
+            onClick={() => onStartScenario(category.id)}
+          />
+        ))}
       </div>
     </div>
   );
@@ -84,7 +83,7 @@ const ScenarioCard = ({
 }: ScenarioCardProps) => {
   return (
     <div
-      className="game-card bg-white border border-gray-200 rounded-xl p-6 text-center cursor-pointer hover:border-blue-300"
+      className="game-card bg-white border border-gray-200 rounded-xl p-6 text-center cursor-pointer hover:border-blue-300 transition-all duration-300 hover:shadow-md"
       onClick={onClick}
     >
       <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -92,7 +91,7 @@ const ScenarioCard = ({
       </div>
       <h4 className="text-lg font-bold text-gray-900 mb-2">{title}</h4>
       <p className="text-gray-600 mb-4">{description}</p>
-      <span className="inline-block bg-sky-500 text-white px-4 py-2 rounded-lg font-medium">
+      <span className="inline-block bg-sky-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-sky-600 transition-colors">
         Start Investigation
       </span>
     </div>

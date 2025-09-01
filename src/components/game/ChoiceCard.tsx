@@ -4,6 +4,7 @@ interface ChoiceCardProps {
   color: string;
   title: string;
   description: string;
+  isSelected: boolean;
   onClick: () => void;
 }
 
@@ -12,18 +13,19 @@ const ChoiceCard = ({
   color,
   title,
   description,
+  isSelected,
   onClick,
 }: ChoiceCardProps) => {
   const colorClasses = {
     bg: `bg-${color}-100`,
-    border: `hover:border-${color}-300`,
+    border: `hover:border-${color}-300 ${isSelected ? `border-${color}-300 ring-2 ring-${color}-200` : 'border-gray-200'}`,
     hover: `hover:bg-${color}-50`,
     text: `text-${color}-600`,
   };
 
   return (
     <div
-      className={`choice-card bg-white border border-gray-200 rounded-lg p-6 cursor-pointer ${colorClasses.border} ${colorClasses.hover} transition-all`}
+      className={`choice-card bg-white border rounded-lg p-6 cursor-pointer transition-all ${colorClasses.border} ${colorClasses.hover} ${isSelected ? 'scale-105' : ''}`}
       onClick={onClick}
     >
       <div className="flex items-start">

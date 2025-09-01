@@ -236,7 +236,6 @@ export interface ScenarioData {
         incorrect: "Giveaway scams often steal personal information or install malware."
       }
     },
-    // Continue with 6 more social media scenarios...
   ];
   
   export const healthScenarioData: ScenarioData[] = [
