@@ -89,13 +89,9 @@ const ReportingForm = () => {
 
   const onSubmit = async (data: ReportFormData) => {
     try {
+      console.log("onSubmit : ", data)
       clearError();
       clearMessage();
-
-      if (!isAuthenticated && !isGuest) {
-        toast.error("Please log in or continue as guest to submit a report");
-        return;
-      }
 
       // Prepare form data for file upload
       const formData = new FormData();
@@ -104,7 +100,7 @@ const ReportingForm = () => {
       formData.append("description", data.description);
       formData.append("categories", JSON.stringify(data.categories));
       formData.append("submittedById", user?.id || "");
-      formData.append("categoryId",data.categoryId);
+      formData.append("categoryId", data.categoryId);
 
       if (data.url) formData.append("url", data.url);
       if (data.evidence) formData.append("evidence", data.evidence);
@@ -129,6 +125,7 @@ const ReportingForm = () => {
         if (fileInput) fileInput.value = "";
       }
     } catch (error: any) {
+      // console.log("error : ",error)
       toast.error(error.message || "Failed to submit report");
     }
   };
@@ -217,7 +214,7 @@ const ReportingForm = () => {
               register={register}
               errors={errors}
               disabled={isSubmitting || loading}
-              // selectedValues={selectedCategories}
+            // selectedValues={selectedCategories}
             />
 
             <FileUpload
@@ -227,8 +224,8 @@ const ReportingForm = () => {
               errors={errors}
               maxFiles={5}
               maxSize={5}
-              // onFilesChange={handleScreenshotChange}
-              // disabled={isSubmitting || loading}
+            // onFilesChange={handleScreenshotChange}
+            // disabled={isSubmitting || loading}
             />
 
             <Checkbox
@@ -245,7 +242,7 @@ const ReportingForm = () => {
               <button
                 type="submit"
                 disabled={
-                  isSubmitting || loading || (!isAuthenticated && !isGuest)
+                  isSubmitting || loading
                 }
                 className="w-full bg-sky-500 hover:bg-sky-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg"
               >

@@ -93,7 +93,6 @@ export const useReportStore = create<Store>()(
             createReport: async (formData:any) => {
                 set({ loading: true, error: null, message: null });
                 try {
-                    // Send as multipart/form-data
                     const response = await api.post('/reports', formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
