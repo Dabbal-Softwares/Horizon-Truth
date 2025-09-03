@@ -71,7 +71,12 @@ The Horizon Truth game follows this user journey:
 
 ```
 src/
-├── components/          # Reusable UI components
+├── components/         # Reusable UI components
+│   ├── about/          # About-specific components
+│   ├── common/         # Common components
+│   ├── contact/        # Contact-specific components
+│   ├── reporting/      # Reporting-specific components
+│   ├── resource/       # Resource-specific components
 │   ├── game/           # Game-specific components
 │   ├── ui/             # Generic UI components
 │   ├── Navbar.tsx      # Navigation component
@@ -166,9 +171,9 @@ This creates a `build` folder with optimized production files.
 
 Ensure these environment variables are set in production:
 
-- `REACT_APP_API_URL`: Your production API endpoint
-- `REACT_APP_SENTRY_DSN`: (Optional) For error tracking
-- `REACT_APP_GA_ID`: (Optional) Google Analytics tracking ID
+- `VITE_API_URL`: Your production API endpoint
+- `VITE_APP_SENTRY_DSN`: (Optional) For error tracking
+- `VITE_APP_GA_ID`: (Optional) Google Analytics tracking ID
 
 ## 📝 License
 
