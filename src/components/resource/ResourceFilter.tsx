@@ -22,6 +22,7 @@ const ResourceFilter = () => {
         badge: "Most Popular",
         link: "#",
         image: StepsToVerifyImg, // Shows steps to verify social media posts
+        isPdf: false // Not a PDF
       },
       {
         id: 7,
@@ -30,19 +31,21 @@ const ResourceFilter = () => {
         description: "Learn to understand misinformations.",
         readTime: "2 hours read",
         badge: "Most Popular", 
-        link: UnderstandingMisinformation,
-        image: GuideCoverImg, 
+        link: UnderstandingMisinformation, // This should be the path to your PDF file
+        image: GuideCoverImg,
+        isPdf: true // This is a PDF
       },
       {
         id: 2,
         title: "Horizon Truth: Solution overview",
-        type: "tool",
+        type: "guide",
         description:
           "Gamified Learning and Crowdsource Reporting and Verification",
         platform: "Web App",
         badge: "New",
         link: "#",
         image: SolutionOverViewImg, // Shows how gamified learning and verification works
+        isPdf: false
       },
       {
         id: 3,
@@ -53,6 +56,7 @@ const ResourceFilter = () => {
         duration: "5 min",
         link: "#",
         image: HorizonTruthImg, // Empowering youth with truth
+        isPdf: false
       },
       {
         id: 4,
@@ -63,26 +67,29 @@ const ResourceFilter = () => {
         readTime: "6 min read",
         link: "#",
         image: FakeNewsSpreadImg, // Shows how fake news spreads across social media
+        isPdf: false
       },
       {
         id: 5,
         title: "Defending Truth",
-        type: "tool",
+        type: "guide",
         description:
           "Learn why defending truth matters",
         platform: "Browser Extension",
         link: "#",
         image: TruthDefenderImg, // Shows how defending truth matters
+        isPdf: false
       },
       {
         id: 6,
         title: "Think before you share",
-        type: "video",
+        type: "guide",
         description:
           "Learn how thinking and verifying before sharing help.",
         duration: "5-10 min each",
         link: "#",
         image: ThinkBeforeYouShareImg, // Encourages thinking before sharing
+        isPdf: false
       },
     ],
   };
@@ -115,9 +122,15 @@ const ResourceFilter = () => {
     setFilteredResources(results);
   }, [activeFilter, searchQuery]);
 
-  // Handle image click to open in new tab
-  const handleImageClick = (imageUrl: string) => {
-    window.open(imageUrl, "_blank");
+  // Handle resource click - PDFs open in new tab, others show image
+  const handleResourceClick = (resource:any) => {
+    if (resource.isPdf) {
+      // Open PDF in new tab
+      window.open(resource.link, "_blank");
+    } else {
+      // For non-PDF resources, open the image in new tab as before
+      window.open(resource.image, "_blank");
+    }
   };
 
   // Get badge color based on type
@@ -302,13 +315,20 @@ const ResourceFilter = () => {
                     className={`h-48 ${getBgColor(
                       resource.type
                     )} flex items-center justify-center relative cursor-pointer`}
-                    onClick={() => handleImageClick(resource.image)}
+                    onClick={() => handleResourceClick(resource)}
                   >
                     <img
                       src={resource.image}
                       alt={resource.title}
                       className="w-full h-full object-cover"
                     />
+                    {resource.isPdf && (
+                      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                        <div className="bg-white rounded-full p-4">
+                          <i className="fas fa-file-pdf text-red-500 text-3xl"></i>
+                        </div>
+                      </div>
+                    )}
                     <i
                       className={`${getIcon(resource.type)} ${getIconColor(
                         resource.type
@@ -354,11 +374,13 @@ const ResourceFilter = () => {
                       {resource.title}
                     </h3>
                     <p className="text-gray-700 mb-4">{resource.description}</p>
-                    <a
+                    <div
                       className="text-sky-500 font-medium flex items-center group cursor-pointer"
-                      onClick={() => handleImageClick(resource.image)}
+                      onClick={() => handleResourceClick(resource)}
                     >
-                      {resource.type === "guide"
+                      {resource.isPdf
+                        ? "View PDF"
+                        : resource.type === "guide"
                         ? "Read Guide"
                         : resource.type === "tool"
                         ? "Use Tool"
@@ -366,7 +388,7 @@ const ResourceFilter = () => {
                         ? "Watch Video"
                         : "Start Course"}{" "}
                       <i className="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-                    </a>
+                    </div>
                   </div>
                 </div>
               ))

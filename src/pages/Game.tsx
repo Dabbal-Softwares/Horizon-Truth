@@ -29,9 +29,7 @@ const GamePage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [guestSessionId, setGuestSessionId] = useState<string | null>(null);
 
-  // Zustand stores
   const {
-    scenarios,
     fetchScenarios,
     updateQuestionResult,
     completeScenario,
