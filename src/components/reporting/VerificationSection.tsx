@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ReportCard from "./ReportCard";
 import Pagination from "../ui/Pagination";
-import { Report, ReportStatus, ReportCategory } from "../../types/report.type";
+import { ReportStatus, ReportCategory } from "../../types/report.type";
 import { useReportStore } from "../../store/report.store";
 
 // Reusable Filter Select Component

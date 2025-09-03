@@ -48,6 +48,7 @@ interface GameState {
     }) => Promise<void>;
 
     completeGuestScenario: (data: {
+        sessionId: string;
         categoryId: string;
         scenarioId: string;
     }) => Promise<void>;
