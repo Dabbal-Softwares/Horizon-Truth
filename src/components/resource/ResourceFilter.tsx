@@ -1,4 +1,142 @@
+import { useState, useEffect } from 'react';
+
 const ResourceFilter = () => {
+    // JSON-formatted resources data
+    const resourcesData = {
+        "resources": [
+            {
+                "id": 1,
+                "title": "The Misinformation Handbook",
+                "type": "guide",
+                "description": "Learn to identify the 7 most common types of misinformation with practical examples and verification techniques.",
+                "readTime": "15 min read",
+                "badge": "Most Popular",
+                "link": "#",
+                "image": "https://via.placeholder.com/400x300/3B82F6/FFFFFF?text=Misinformation+Handbook"
+            },
+            {
+                "id": 2,
+                "title": "Fact-Check Assistant",
+                "type": "tool",
+                "description": "Our browser extension that helps you verify claims and images right as you browse social media and news sites.",
+                "platform": "Web App",
+                "badge": "New",
+                "link": "#",
+                "image": "https://via.placeholder.com/400x300/10B981/FFFFFF?text=Fact+Check+Tool"
+            },
+            {
+                "id": 3,
+                "title": "Digital Literacy Fundamentals",
+                "type": "course",
+                "description": "A free interactive course covering source evaluation, bias recognition, and fact-checking methodologies.",
+                "duration": "2 hours",
+                "link": "#",
+                "image": "https://via.placeholder.com/400x300/8B5CF6/FFFFFF?text=Digital+Literacy+Course"
+            },
+            {
+                "id": 4,
+                "title": "Deepfake Detection Guide",
+                "type": "guide",
+                "description": "Learn how to spot AI-generated media and verify authenticity of videos and images.",
+                "readTime": "20 min read",
+                "link": "#",
+                "image": "https://via.placeholder.com/400x300/3B82F6/FFFFFF?text=Deepfake+Guide"
+            },
+            {
+                "id": 5,
+                "title": "Verification Browser Extension",
+                "type": "tool",
+                "description": "Reverse image search and fact-checking tools integrated directly into your browser.",
+                "platform": "Browser Extension",
+                "link": "#",
+                "image": "https://via.placeholder.com/400x300/10B981/FFFFFF?text=Browser+Extension"
+            },
+            {
+                "id": 6,
+                "title": "Media Literacy Video Series",
+                "type": "video",
+                "description": "Short, engaging videos that teach critical thinking skills for analyzing media content.",
+                "duration": "5-10 min each",
+                "link": "#",
+                "image": "https://via.placeholder.com/400x300/EF4444/FFFFFF?text=Video+Series"
+            }
+        ]
+    };
+
+    const [activeFilter, setActiveFilter] = useState('all');
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredResources, setFilteredResources] = useState(resourcesData.resources);
+
+    // Filter resources based on active filter and search query
+    useEffect(() => {
+        let results = resourcesData.resources;
+        
+        // Filter by type
+        if (activeFilter !== 'all') {
+            results = results.filter(resource => resource.type === activeFilter);
+        }
+        
+        // Filter by search query
+        if (searchQuery) {
+            const query = searchQuery.toLowerCase();
+            results = results.filter(resource => 
+                resource.title.toLowerCase().includes(query) || 
+                resource.description.toLowerCase().includes(query)
+            );
+        }
+        
+        setFilteredResources(results);
+    }, [activeFilter, searchQuery]);
+
+    // Handle image click to open in new tab
+    const handleImageClick = (imageUrl:string) => {
+        window.open(imageUrl, '_blank');
+    };
+
+    // Get badge color based on type
+    const getBadgeColor = (type:string) => {
+        switch(type) {
+            case 'guide': return 'bg-sky-100 text-sky-500';
+            case 'tool': return 'bg-green-100 text-green-500';
+            case 'video': return 'bg-red-100 text-red-500';
+            case 'course': return 'bg-purple-100 text-purple-500';
+            default: return 'bg-gray-100 text-gray-500';
+        }
+    };
+
+    // Get background color based on type
+    const getBgColor = (type:string) => {
+        switch(type) {
+            case 'guide': return 'bg-blue-100';
+            case 'tool': return 'bg-green-100';
+            case 'video': return 'bg-red-100';
+            case 'course': return 'bg-purple-100';
+            default: return 'bg-gray-100';
+        }
+    };
+
+    // Get icon based on type
+    const getIcon = (type:string) => {
+        switch(type) {
+            case 'guide': return 'fas fa-book-open';
+            case 'tool': return 'fas fa-check-double';
+            case 'video': return 'fas fa-video';
+            case 'course': return 'fas fa-graduation-cap';
+            default: return 'fas fa-file-alt';
+        }
+    };
+
+    // Get icon color based on type
+    const getIconColor = (type:string) => {
+        switch(type) {
+            case 'guide': return 'text-sky-500';
+            case 'tool': return 'text-green-500';
+            case 'video': return 'text-red-500';
+            case 'course': return 'text-purple-500';
+            default: return 'text-gray-500';
+        }
+    };
+
     return (
         <>
             <section className="py-12 bg-white">
@@ -18,32 +156,32 @@ const ResourceFilter = () => {
 
                     <div className="flex flex-wrap justify-center gap-3 mb-8">
                         <button
-                            className="filter-btn active px-4 py-2 rounded-full border border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white transition duration-300"
-                            data-filter="all"
+                            className={`filter-btn px-4 py-2 rounded-full border border-sky-500 transition duration-300 ${activeFilter === 'all' ? 'bg-sky-500 text-white' : 'text-sky-500 hover:bg-sky-500 hover:text-white'}`}
+                            onClick={() => setActiveFilter('all')}
                         >
                             All Resources
                         </button>
                         <button
-                            className="filter-btn px-4 py-2 rounded-full border border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white transition duration-300"
-                            data-filter="guide"
+                            className={`filter-btn px-4 py-2 rounded-full border border-sky-500 transition duration-300 ${activeFilter === 'guide' ? 'bg-sky-500 text-white' : 'text-sky-500 hover:bg-sky-500 hover:text-white'}`}
+                            onClick={() => setActiveFilter('guide')}
                         >
                             <i className="fas fa-book mr-2"></i> Guides
                         </button>
                         <button
-                            className="filter-btn px-4 py-2 rounded-full border border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white transition duration-300"
-                            data-filter="tool"
+                            className={`filter-btn px-4 py-2 rounded-full border border-sky-500 transition duration-300 ${activeFilter === 'tool' ? 'bg-sky-500 text-white' : 'text-sky-500 hover:bg-sky-500 hover:text-white'}`}
+                            onClick={() => setActiveFilter('tool')}
                         >
                             <i className="fas fa-tools mr-2"></i> Tools
                         </button>
                         <button
-                            className="filter-btn px-4 py-2 rounded-full border border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white transition duration-300"
-                            data-filter="video"
+                            className={`filter-btn px-4 py-2 rounded-full border border-sky-500 transition duration-300 ${activeFilter === 'video' ? 'bg-sky-500 text-white' : 'text-sky-500 hover:bg-sky-500 hover:text-white'}`}
+                            onClick={() => setActiveFilter('video')}
                         >
                             <i className="fas fa-video mr-2"></i> Videos
                         </button>
                         <button
-                            className="filter-btn px-4 py-2 rounded-full border border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white transition duration-300"
-                            data-filter="course"
+                            className={`filter-btn px-4 py-2 rounded-full border border-sky-500 transition duration-300 ${activeFilter === 'course' ? 'bg-sky-500 text-white' : 'text-sky-500 hover:bg-sky-500 hover:text-white'}`}
+                            onClick={() => setActiveFilter('course')}
                         >
                             <i className="fas fa-graduation-cap mr-2"></i> Courses
                         </button>
@@ -55,6 +193,8 @@ const ResourceFilter = () => {
                                 type="text"
                                 placeholder="Search resources..."
                                 className="w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
                             />
                             <i className="fas fa-search absolute right-3 top-3 text-gray-400"></i>
                         </div>
@@ -65,122 +205,84 @@ const ResourceFilter = () => {
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-12">
                         <span className="text-sky-500 font-semibold tracking-wider">
-                            HIGHLIGHTED
+                            {activeFilter === 'all' ? 'HIGHLIGHTED' : activeFilter.toUpperCase()}
                         </span>
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                            Featured Resources
+                            {activeFilter === 'all' ? 'Featured Resources' : `${activeFilter.charAt(0).toUpperCase() + activeFilter.slice(1)} Resources`}
                         </h2>
                         <p className="text-gray-700 max-w-2xl mx-auto">
-                            Start with these essential resources recommended by our digital
-                            literacy experts.
+                            {activeFilter === 'all' 
+                                ? "Start with these essential resources recommended by our digital literacy experts."
+                                : `Browse our collection of ${activeFilter} resources to build your misinformation defense skills.`
+                            }
                         </p>
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div
-                            className="resource-card bg-white rounded-xl shadow-md overflow-hidden"
-                            data-type="guide"
-                        >
-                            <div className="h-48 bg-blue-100 flex items-center justify-center relative">
-                                <i className="fas fa-book-open text-sky-500 text-5xl"></i>
-                                <div className="absolute top-4 left-4 bg-sky-500 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                    Most Popular
-                                </div>
-                            </div>
-                            <div className="p-6">
-                                <div className="flex items-center mb-3">
-                                    <span className="bg-sky-100 text-sky-500 text-xs font-medium px-2 py-1 rounded">
-                                        Guide
-                                    </span>
-                                    <span className="text-xs text-gray-500 ml-2">
-                                        <i className="far fa-clock mr-1"></i> 15 min read
-                                    </span>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                                    The Misinformation Handbook
-                                </h3>
-                                <p className="text-gray-700 mb-4">
-                                    Learn to identify the 7 most common types of misinformation
-                                    with practical examples and verification techniques.
-                                </p>
-                                <a
-                                    href="#"
-                                    className="text-sky-500 font-medium flex items-center group"
+                        {filteredResources.length > 0 ? (
+                            filteredResources.map(resource => (
+                                <div
+                                    key={resource.id}
+                                    className="resource-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
+                                    data-type={resource.type}
                                 >
-                                    Read Guide{" "}
-                                    <i className="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div
-                            className="resource-card bg-white rounded-xl shadow-md overflow-hidden"
-                            data-type="tool"
-                        >
-                            <div className="h-48 bg-green-100 flex items-center justify-center relative">
-                                <i className="fas fa-check-double text-green-500 text-5xl"></i>
-                                <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                    New
+                                    <div 
+                                        className={`h-48 ${getBgColor(resource.type)} flex items-center justify-center relative cursor-pointer`}
+                                        onClick={() => handleImageClick(resource.image)}
+                                    >
+                                        <img 
+                                            src={resource.image} 
+                                            alt={resource.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <i className={`${getIcon(resource.type)} ${getIconColor(resource.type)} text-5xl absolute opacity-70`}></i>
+                                        {resource.badge && (
+                                            <div className="absolute top-4 left-4 bg-sky-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                                                {resource.badge}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="p-6">
+                                        <div className="flex items-center mb-3">
+                                            <span className={`${getBadgeColor(resource.type)} text-xs font-medium px-2 py-1 rounded`}>
+                                                {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
+                                            </span>
+                                            <span className="text-xs text-gray-500 ml-2">
+                                                {resource.type === 'guide' || resource.type === 'course' ? (
+                                                    <><i className="far fa-clock mr-1"></i> {resource.readTime || resource.duration}</>
+                                                ) : resource.type === 'tool' ? (
+                                                    <><i className="fas fa-external-link-alt mr-1"></i> {resource.platform}</>
+                                                ) : (
+                                                    <><i className="far fa-clock mr-1"></i> {resource.duration}</>
+                                                )}
+                                            </span>
+                                        </div>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-3">
+                                            {resource.title}
+                                        </h3>
+                                        <p className="text-gray-700 mb-4">
+                                            {resource.description}
+                                        </p>
+                                        <a
+                                            href={resource.link}
+                                            className="text-sky-500 font-medium flex items-center group"
+                                        >
+                                            {resource.type === 'guide' ? 'Read Guide' : 
+                                             resource.type === 'tool' ? 'Use Tool' : 
+                                             resource.type === 'video' ? 'Watch Video' : 
+                                             'Start Course'}{' '}
+                                            <i className="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                                        </a>
+                                    </div>
                                 </div>
+                            ))
+                        ) : (
+                            <div className="col-span-full text-center py-12">
+                                <i className="fas fa-search text-4xl text-gray-300 mb-4"></i>
+                                <h3 className="text-xl font-semibold text-gray-700">No resources found</h3>
+                                <p className="text-gray-500">Try a different filter or search term</p>
                             </div>
-                            <div className="p-6">
-                                <div className="flex items-center mb-3">
-                                    <span className="bg-green-100 text-green-500 text-xs font-medium px-2 py-1 rounded">
-                                        Tool
-                                    </span>
-                                    <span className="text-xs text-gray-500 ml-2">
-                                        <i className="fas fa-external-link-alt mr-1"></i> Web App
-                                    </span>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                                    Fact-Check Assistant
-                                </h3>
-                                <p className="text-gray-700 mb-4">
-                                    Our browser extension that helps you verify claims and images
-                                    right as you browse social media and news sites.
-                                </p>
-                                <a
-                                    href="#"
-                                    className="text-sky-500 font-medium flex items-center group"
-                                >
-                                    Use Tool{" "}
-                                    <i className="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div
-                            className="resource-card bg-white rounded-xl shadow-md overflow-hidden"
-                            data-type="course"
-                        >
-                            <div className="h-48 bg-purple-100 flex items-center justify-center">
-                                <i className="fas fa-graduation-cap text-purple-500 text-5xl"></i>
-                            </div>
-                            <div className="p-6">
-                                <div className="flex items-center mb-3">
-                                    <span className="bg-purple-100 text-purple-500 text-xs font-medium px-2 py-1 rounded">
-                                        Course
-                                    </span>
-                                    <span className="text-xs text-gray-500 ml-2">
-                                        <i className="far fa-clock mr-1"></i> 2 hours
-                                    </span>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                                    Digital Literacy Fundamentals
-                                </h3>
-                                <p className="text-gray-700 mb-4">
-                                    A free interactive course covering source evaluation, bias
-                                    recognition, and fact-checking methodologies.
-                                </p>
-                                <a
-                                    href="#"
-                                    className="text-sky-500 font-medium flex items-center group"
-                                >
-                                    Start Course{" "}
-                                    <i className="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-                                </a>
-                            </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </section>
