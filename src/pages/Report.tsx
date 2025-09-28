@@ -36,11 +36,11 @@ const ReportPage = () => {
   };
 
   const socialPlatforms = [
-    { name: 'Twitter', icon: <FaTwitter className="mr-2" /> },
-    { name: 'Facebook', icon: <FaFacebook className="mr-2" /> },
-    { name: 'Instagram', icon: <FaClipboard className="mr-2" /> },
-    { name: 'YouTube', icon: <FaClipboard className="mr-2" /> },
-    { name: 'Other', icon: <FaLink className="mr-2" /> }
+    { id: '12kalsdfj',name: 'Twitter', icon: <FaTwitter className="mr-2" /> },
+    { id: '22kalsdfj',name: 'Facebook', icon: <FaFacebook className="mr-2" /> },
+    { id: '32kalsdfj',name: 'Instagram', icon: <FaClipboard className="mr-2" /> },
+    { id: '42kalsdfj',name: 'YouTube', icon: <FaClipboard className="mr-2" /> },
+    { id: '52kalsdfj',name: 'Other', icon: <FaLink className="mr-2" /> }
   ];
 
   const healthCategories = [
@@ -175,7 +175,7 @@ const ReportPage = () => {
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                         {socialPlatforms.map((platform) => (
                           <button
-                            key={platform.name}
+                            key={platform.id}
                             type="button"
                             className={`flex items-center justify-center p-3 rounded-lg border ${
                               formData.platform === platform.name

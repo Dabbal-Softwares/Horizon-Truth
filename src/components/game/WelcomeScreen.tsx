@@ -54,15 +54,16 @@ const WelcomeScreen = ({ onStartScenario, categories }: WelcomeScreenProps) => {
       </h3>
 
       <div className="grid md:grid-cols-2 gap-6">
-        {categories && categories.map((category) => (
-          <ScenarioCard
-            key={category.id}
-            icon={category.icon}
-            title={category.label}
-            description={`Explore ${category.label} misinformation scenarios`}
-            onClick={() => onStartScenario(category.id)}
-          />
-        ))}
+        {Array.isArray(categories) &&
+          categories.map((category) => (
+            <ScenarioCard
+              key={category.id}
+              icon={category.icon}
+              title={category.label}
+              description={`Explore ${category.label} misinformation scenarios`}
+              onClick={() => onStartScenario(category.id)}
+            />
+          ))}
       </div>
     </div>
   );

@@ -172,7 +172,7 @@ const VerificationSection = () => {
         )}
 
         <div className="space-y-6">
-          {!loading && reports.length > 0
+          {!loading && Array.isArray(reports) && reports.length > 0
             ? reports.map((report) => (
                 <ReportCard
                   key={report.id}
@@ -183,15 +183,16 @@ const VerificationSection = () => {
                         ? `${report.description.substring(0, 60)}...`
                         : report.description,
                     description: report.description,
-                    category: report.categories.join(", "),
+                    category: Array.isArray(report.categories)
+                      ? report.categories.join(", ")
+                      : "",
                     status: report.status,
                     postedTime: formatTimeAgo(
                       report?.createdAt
                         ? new Date(report.createdAt).toDateString()
                         : new Date().toDateString()
                     ),
-
-                    reviewers: 0, // This would need to come from your backend
+                    reviewers: 0,
                   }}
                 />
               ))

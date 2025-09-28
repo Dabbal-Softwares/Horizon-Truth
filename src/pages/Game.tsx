@@ -317,7 +317,7 @@ const GamePage = () => {
           ) : (
             <WelcomeScreen
               onStartScenario={handleStartScenario}
-              categories={categories}
+              categories={categories ?? []}
             />
           )}
         </div>
