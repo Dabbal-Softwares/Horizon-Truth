@@ -4,7 +4,7 @@ import AbdA from './AbdurehmanA.jpg';
 import AjaM from './AjaibMoh.jpg';
 import BikEl from './BilkesEl.jpg';
 import GetIM from './Getahun.jpg';
-import MomHas from './MohammedHass.jpg';
+import MomHas from './mohammedHass.jpg';
 import MohmIb from './MohammedIb.jpg';
 import MohmMum from './MohammedMumt.jpg';
 import RemH from './RemlaHa.jpg';
