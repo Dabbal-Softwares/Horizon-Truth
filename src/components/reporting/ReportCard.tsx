@@ -1,7 +1,7 @@
 
 interface Report {
   id: string;
-  title: string;
+  title?: string;
   description: string;
   category: "false_information" | string; // can be union if there are more categories
   postedTime: string; // consider Date if you’ll parse it

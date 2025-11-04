@@ -212,7 +212,7 @@ const GamePage = () => {
             });
           } else if (isGuest && guestSessionId) {
             await completeGuestScenario({
-              // sessionId: guestSessionId,
+              sessionId: guestSessionId,
               categoryId: scenario.categoryId,
               scenarioId: scenario.id,
             });
