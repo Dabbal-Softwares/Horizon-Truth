@@ -9,11 +9,11 @@ export interface Report {
   screenshotPaths?: string[];
   status: ReportStatus;
   reviewerNotes?: string;
-  submittedById: string;
+  submittedById?: string;
   reviewedById?: string;
   reviewedBy?: User;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   reviewedAt?: Date;
 }
 
