@@ -53,6 +53,8 @@ const ContactForm = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      await response.json();
       
       reset();
       alert('Message sent successfully! We will get back to you soon.');

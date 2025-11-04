@@ -48,6 +48,7 @@ interface GameState {
     }) => Promise<void>;
 
     completeGuestScenario: (data: {
+        sessionId: string;
         categoryId: string;
         scenarioId: string;
     }) => Promise<void>;
@@ -152,11 +153,11 @@ export const useGameStore = create<GameState>()(
                 try {
                     const response = await api.put(`/game/scenarios/${id}`, data);
                     set(state => ({
-                        scenarios: state.scenarios.map(scenario => 
+                        scenarios: state.scenarios.map(scenario =>
                             scenario.id === id ? { ...scenario, ...(response.data.data || response.data) } : scenario
                         ),
-                        currentScenario: state.currentScenario?.id === id 
-                            ? { ...state.currentScenario, ...(response.data.data || response.data) } 
+                        currentScenario: state.currentScenario?.id === id
+                            ? { ...state.currentScenario, ...(response.data.data || response.data) }
                             : state.currentScenario,
                         isLoading: false
                     }));
@@ -200,9 +201,12 @@ export const useGameStore = create<GameState>()(
                     }
 
                     const response = await api.get('/game/scenarios', { params: filters });
-                    set({ scenarios: response.data?.data?.data || response.data?.data || response.data, isLoading: false });
+                    const scenariosData = response.data?.data?.data || response.data?.data || response.data;
+                    set({ scenarios: scenariosData, isLoading: false });
+                    return scenariosData;
                 } catch (error: any) {
                     set({ error: error.response?.data?.message || error.message, isLoading: false });
+                    throw error;    
                 }
             },
 

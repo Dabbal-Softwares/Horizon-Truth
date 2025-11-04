@@ -172,15 +172,23 @@ const VerificationSection = () => {
         )}
 
         <div className="space-y-6">
-          {!loading && reports.length > 0
+          {!loading && Array.isArray(reports) && reports.length > 0
             ? reports.map((report) => (
                 <ReportCard
                   key={report.id}
                   report={{
                     id: report.id,
                     description: report.description,
-                    categories: report.categories,
+                    category: Array.isArray(report.categories)
+                      ? report.categories.join(", ")
+                      : "",
                     status: report.status,
+                    // postedTime: formatTimeAgo(
+                    //   report?.createdAt
+                    //     ? new Date(report.createdAt).toDateString()
+                    //     : new Date().toDateString()
+                    // ),
+                    reviewers: 0,
                   }}
                 />
               ))
