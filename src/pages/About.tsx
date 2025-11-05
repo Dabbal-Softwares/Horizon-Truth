@@ -37,9 +37,9 @@ const AboutUsPage = () => {
       <HorizonStory />
       <MissionVision />
       <ValueSection />
+      <PartnersSection />
       <TeamSection />
       <StatsSection />
-      <PartnersSection />
       <CTASection />
     </div>
   );
