@@ -9,6 +9,7 @@ import GameProgress from "../components/game/GameProgress";
 import { useGameSessionStore } from "../store/game-session.store";
 import { useAuthStore } from "../store/auth.store";
 import { guestService } from "../services/guestService";
+import { Link } from "react-router-dom";
 
 // Define interface for local answer storage
 interface LocalAnswer {
@@ -337,15 +338,15 @@ const GamePage = () => {
             Literacy. All Rights Reserved
           </p>
           <div className="flex justify-center space-x-4 mt-2">
-            <a href="#" className="hover:text-sky-500">
+            <Link to={"/privacy-policy"} className="hover:text-sky-500">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-sky-500">
+            </Link>
+            <Link to={"/terms-of-service"} className="hover:text-sky-500">
               Terms of Service
-            </a>
-            <a href="#" className="hover:text-sky-500">
+            </Link>
+            <Link to={"/contact"} className="hover:text-sky-500">
               Contact Us
-            </a>
+            </Link>
           </div>
         </footer>
       </div>

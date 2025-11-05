@@ -11,6 +11,10 @@ import ReportingPage from "./pages/Reporting";
 import ContactUsPage from "./pages/ContactUs";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import CookiesPolicy from "./pages/CookiesPolicy";
+import FAQs from "./pages/Faqs";
 
 const AnimatedOutlet = () => {
   const location = useLocation();
@@ -107,6 +111,22 @@ export const router = createBrowserRouter([
             path: "contact",
             element: <ContactUsPage />,
           },
+          {
+            path: "privacy-policy",
+            element: <PrivacyPolicy />
+          },
+          {
+            path: "terms-of-service",
+            element: <TermsOfService />
+          },
+          {
+            path: "cookies",
+            element: <CookiesPolicy />
+          },
+          {
+            path: "faqs",
+            element: <FAQs />
+          }
         ],
       },
     ],
