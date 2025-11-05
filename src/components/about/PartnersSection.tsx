@@ -33,7 +33,7 @@ const PartnerCard: React.FC<PartnerCardProps> = ({
             }}
           />
           <div
-            className={`${iconBgColor} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 hidden`}
+            className={`${iconBgColor} w-16 h-16 rounded-full items-center justify-center mx-auto mb-3 hidden`}
           >
             <i className={`${iconClass} ${iconColor} text-xl`}></i>
           </div>

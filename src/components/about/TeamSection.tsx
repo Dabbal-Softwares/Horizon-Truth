@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { AbduljPhoto, AbdurehmanA, AbdurezakIsak, AjaibMoh, BilkesEl, Getahun, MohammedHas1, MohammedIb, MohammedMum, RemlaHa, worknehD } from "../../assets/photos";
 
 interface TeamMember {
@@ -128,12 +129,12 @@ const TeamSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <a 
-            href="https://truth.debbal.com/contact" 
+          <Link
+            to="/contact" 
             className="inline-block bg-sky-500 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg"
           >
             Join Our Team
-          </a>
+          </Link>
         </div>
       </div>
     </section>

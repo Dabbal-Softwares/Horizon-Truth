@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Type definitions
 interface FAQItem {
@@ -56,8 +57,6 @@ const FAQs = ({
   title = "Frequently Asked Questions", 
   description = "Find answers to common questions", 
   sectionTitle = "HELP & SUPPORT",
-  contactLink = "#",
-  contactText = "Contact our support team"
 }: FAQsProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -100,13 +99,13 @@ const FAQs = ({
 
           <div className="text-center mt-8">
             <p className="text-gray-700">
-              Still have questions?{" "}
-              <a
-                href={contactLink}
+              explore more FAQs?{" "}
+              <Link
+                to={'/faqs'}
                 className="text-sky-500 font-medium hover:text-sky-600"
               >
-                {contactText}
-              </a>
+                {'Click here'}
+              </Link>
             </p>
           </div>
         </div>
@@ -142,7 +141,7 @@ const ResourcesPageFAQs = () => {
       title="Frequently Asked Questions"
       description="Find answers to common questions about our resources and digital literacy."
       sectionTitle="HELP & SUPPORT"
-      contactLink="https://truth.debbal.com/contact"
+      contactLink="/contact"
       contactText="Contact our support team"
     />
   );

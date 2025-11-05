@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 const HorizonStory = () => {
   return (
@@ -17,9 +18,9 @@ const HorizonStory = () => {
                     <p className="text-gray-700 mb-8">
                         Today, we combine evidence-based educational approaches with innovative technology to create engaging experiences that make learning about misinformation prevention both effective and enjoyable.
                     </p>
-                    <a href="https://truth.debbal.com/contact" className="inline-block bg-sky-500 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
+                    <Link to="/contact" className="inline-block bg-sky-500 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
                         Get in Touch
-                    </a>
+                    </Link>
                 </div>
                 <div className="lg:w-1/2 lg:pl-16">
                     <div className="bg-blue-50 p-8 rounded-xl shadow-md">

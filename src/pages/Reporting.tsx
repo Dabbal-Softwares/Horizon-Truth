@@ -1,4 +1,3 @@
-import CTAWithButton from "../components/common/CTAWithButton";
 import Hero from "../components/Hero";
 import ComputingImpactSection from "../components/reporting/ComputingImpactSection";
 import HowItWorkSection from "../components/reporting/HowItWorkSection";
@@ -36,7 +35,7 @@ const ReportingPage = () => {
       <ReportingForm />
       <VerificationSection />
       <ComputingImpactSection />
-      <CTAWithButton />
+      {/* <CTAWithButton /> */}
     </div>
   );
 };
